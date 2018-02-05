@@ -1,11 +1,9 @@
 <%@page language="java" contentType="text/html" pageEncoding="ISO-8859-1"%>
-<%! int i; int limit=99; 
-    String [] unitsMap = { "Cero", "Uno", "Dos", "Tres", "Cuatro", "Cinco","Seis", "Siete", "Ocho", "Nueve", "Diez", "Once", "Doce", "Trece", "Catorce", "Quince", "Dieciseis", "Diecisiete", "Dieciocho", "Diecinueve" };
-    String [] tensMap = { "","","Veinte", "Treinta", "Cuarenta", "Cincuenta", "Sesenta", "Setenta", "Ochenta", "Noventa" };
-    String [] aux;
-    String aux2;
-    int firstNumber;
-    int secondNumber;
+<%!
+    String[] parameters = {"Nombre", "Sede Social", "Telefono","Capital Extranjero"};
+    String[] isExtranjero = {"Pais","Aportacion en %","Banco en el extranjero"};
+    String[] noExtranjero = {"Socio princial","Aportacion socio principal","Avalista"};
+    int i;
 %>
 <!DOCTYPE html>
 <html>
@@ -14,6 +12,29 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="index.jsp" method="get">
+            
+            <% for (i = 0; i < parameters.length; i++) {%>
+                <%=parameters[i]%>
+                
+                <%
+                
+                if(i==3)
+                {%>
+                    SI <input type="radio"
+                               value="SI" name= <%=parameters[i]%>>
+                    NO <input type="radio"
+                               value="NO" name= <%=parameters[i]%>>
+                <%}
+                  else
+                    {
+                %>
+                <input type="text"
+                               name= <%=parameters[i]%>>
+                <br>
+                <% }} %>
+                <input type="submit" value="Enviar"
+                               size="2">
+        </form>
     </body>
 </html>
