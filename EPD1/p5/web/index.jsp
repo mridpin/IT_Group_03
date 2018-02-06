@@ -1,9 +1,12 @@
+<%@page import="java.util.Enumeration"%>
 <%@page language="java" contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%!
     String[] parameters = {"Nombre", "Sede Social", "Telefono","Capital Extranjero"};
     String[] isExtranjero = {"Pais","Aportacion en %","Banco en el extranjero"};
     String[] noExtranjero = {"Socio princial","Aportacion socio principal","Avalista"};
     int i;
+    Enumeration getParameters;
+    String aux;
 %>
 <!DOCTYPE html>
 <html>
@@ -28,11 +31,25 @@
                 <%}
                   else
                     {
+
+                    aux = (String) request.getParameter(parameters[i]);
+                    if(aux !=null && aux.isEmpty())
+                    {   
+                        aux="";
+                    }
                 %>
                 <input type="text"
-                               name= <%=parameters[i]%>>
+                              value='<%=aux%>' name= <%=parameters[i]%>>
                 <br>
-                <% }} %>
+                <% }} 
+                
+                getParameters = request.getParameterNames();
+                while (getParameters.hasMoreElements()) {
+                    String paramName = (String) getParameters.nextElement();
+                    String paramValue = (String) request.getParameter(paramName);
+}
+                %>
+                <br>
                 <input type="submit" value="Enviar"
                                size="2">
         </form>
