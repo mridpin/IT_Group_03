@@ -7,7 +7,7 @@
     String[] selected = {};
     int i;
     Enumeration getParameters;
-    String aux,isCapital;
+    String aux,isCapital,paramName,paramValue;
 %>
 <!DOCTYPE html>
 <html>
@@ -48,8 +48,31 @@
                 <br>
                 <%-- We get the value from the checkbox and determine which piece of form we need to show, to make the code more efficient,
                      we reuse the code just changing which array we are going to show--%>
+                
+                <%-- We first check if it's the second time showing the form with a hidden field--%>
                 <% }} 
                 
+                if(request.getParameter("hidden")!=null)
+                {%>
+                    
+                    <table border=1 cellspacing=1 cellpadding=2>
+            <%
+                Enumeration getParameters = request.getParameterNames();
+                while (getParameters.hasMoreElements()) {
+                    paramName = (String) getParameters.nextElement();
+                    paramValue = (String) request.getParameter(paramName);
+                    if(!paramValue.equals("hidden")){
+            %>
+            <tr>
+                <td><%=paramName%></td>
+                <td><%=paramValue%></td>
+            </tr>
+            <% }}%>
+        </table>
+
+                <%}
+                else
+                {
                 isCapital = request.getParameter(parameters[parameters.length-1]);
 
                 if(isCapital!=null)
@@ -71,7 +94,12 @@
                                name= '<%=selected[i]%>'>
                 <br>
                 
-                <%}}%>
+                <%}
+
+                %>
+                <input type="hidden" name="hidden" value="hidden"> 
+                <%}}
+                %>
                 <br>
                 <input type="submit" value="Enviar"
                                size="2">
