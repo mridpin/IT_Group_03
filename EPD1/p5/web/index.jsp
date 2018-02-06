@@ -4,15 +4,16 @@
     String[] parameters = {"Nombre", "Sede Social", "Telefono","Capital Extranjero"};
     String[] isExtranjero = {"Pais","Aportacion en %","Banco en el extranjero"};
     String[] noExtranjero = {"Socio princial","Aportacion socio principal","Avalista"};
+    String[] selected = {};
     int i;
     Enumeration getParameters;
-    String aux;
+    String aux,isCapital;
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Grupo 3 - EPD1 p5</title>
     </head>
     <body>
         <form action="index.jsp" method="get">
@@ -20,35 +21,57 @@
             <% for (i = 0; i < parameters.length; i++) {%>
                 <%=parameters[i]%>
                 
+                <%-- We include a special case for the radio button, also the names of every input needs to be surrounded by '' so
+                that we can get the parameters properly--%>
                 <%
-                
                 if(i==3)
                 {%>
                     SI <input type="radio"
-                               value="SI" name= <%=parameters[i]%>>
+                               value="SI" name= '<%=parameters[i]%>'>
                     NO <input type="radio"
-                               value="NO" name= <%=parameters[i]%>>
+                               value="NO" name= '<%=parameters[i]%>'>
+                    
+                    <%-- If it's the first time running the program, we don't display null. If it's not the first time running the program
+                         we show the values captured from get--%>
                 <%}
                   else
                     {
 
                     aux = (String) request.getParameter(parameters[i]);
-                    if(aux !=null && aux.isEmpty())
+                    if(aux==null)
                     {   
                         aux="";
                     }
                 %>
                 <input type="text"
-                              value='<%=aux%>' name= <%=parameters[i]%>>
+                              value='<%=aux%>' name= '<%=parameters[i]%>'>
                 <br>
+                <%-- We get the value from the checkbox and determine which piece of form we need to show, to make the code more efficient,
+                     we reuse the code just changing which array we are going to show--%>
                 <% }} 
                 
-                getParameters = request.getParameterNames();
-                while (getParameters.hasMoreElements()) {
-                    String paramName = (String) getParameters.nextElement();
-                    String paramValue = (String) request.getParameter(paramName);
-}
-                %>
+                isCapital = request.getParameter(parameters[parameters.length-1]);
+
+                if(isCapital!=null)
+                {
+
+                if(isCapital.equals("SI"))
+                {
+                    selected = isExtranjero;
+                }
+                else
+                {
+                    selected = noExtranjero;
+                }
+                %><br>
+                <%for (i = 0; i < selected.length; i++) {%>
+                <%=selected[i]%>
+                
+                <input type="text"
+                               name= '<%=selected[i]%>'>
+                <br>
+                
+                <%}}%>
                 <br>
                 <input type="submit" value="Enviar"
                                size="2">
