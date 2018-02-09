@@ -16,7 +16,7 @@
     Integer nextValue = 1;
     Integer diff = 0;
     List<Integer[]> res = new ArrayList<>();
-    String url = "https://chart.googleapis.com/chart?";
+    String url = "";
 
     public List<Integer[]> getProgression(int ratio) {
         i = 0;
@@ -50,51 +50,37 @@ and open the template in the editor.
     </head>
     <body>
         <h1>IT G03 EPD01 EJ2</h1>
-
+        
         <%
-            if (request.getParameter("submit") != null) {
-                ratio = Integer.parseInt(request.getParameter("number"));
+            for (ratio = 2; ratio < 6; ratio++) {
                 res = getProgression(ratio);
-        %>
-        <table>
-            <tr>
-                <th>Valores</th>
-                <th>Diferencia</th>
-            </tr>
-            <%
+                out.write("<h3>Ratio: " + ratio+ "</h3>");
+                url = "https://chart.googleapis.com/chart?";
                 url += "cht=lc&"
                         + "chs=500x200&"
                         + "chd=t:";
                 // Loop for table
+                out.write("<table border='2'><tr><th>Valores</th><th>Diferencia</th></tr>");
                 for (Integer[] tr : res) {
                     out.write("<tr><td>" + tr[0] + "</td><td>" + tr[1] + "</td></tr>");
                 }
+                out.write("</table>");
                 // Loop for values
                 for (Integer[] tr : res) {
                     url += tr[0] + ",";
                 }
-                url = url.substring(0, url.length() - 1);
+                url = url.substring(0, url.length() - 1); // Remove last comma
                 url += "|";
                 // Loop for difference
                 for (Integer[] tr : res) {
                     url += tr[1] + ",";
                 }
-                url = url.substring(0, url.length() - 1);
+                url = url.substring(0, url.length() - 1); // Remove last comma
                 url += "&chco=FF0000,0000FF";
                 url += "&chdl=Valores|Diferencias";
                 url += "&chxt=x,y";
-                out.write("<img src='" + url + "'>");
-            %> 
-        </table>
-        <%
-        } else {
-        %> 
-
-        <form method="get" action="index.jsp">
-            <label>Enter a number: </label><input type="number" name="number" value="1" />
-            <br /><input type="submit" name="submit" />
-        </form>
-        <%
+                res.clear();
+                out.write("<br /><img src='" + url + "'>");
             }
         %>
     </body>
