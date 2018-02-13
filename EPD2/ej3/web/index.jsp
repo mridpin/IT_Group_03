@@ -8,15 +8,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<% 
-    if (request.getParameter("submit") != null) {
-        session.invalidate();
-        out.write("AAAAA");
-    }
-    out.write("AAAAA");
+<%
+
     Date creationDate = new Date(session.getCreationTime());
     String id = session.getId();
-    Float duration = (float)(new Date().getTime() - creationDate.getTime()) / 1000;
+    Float duration = (float) (new Date().getTime() - creationDate.getTime()) / 1000;
 %>
 
 <html>
@@ -32,7 +28,7 @@
             <li>Fecha de creaci&oacute;n: <%=creationDate%></li>
             <li>Duraci&oacute;n: <%=duration%> seconds</li>
         </ul>
-        <form method="get" action="index.jsp">
+        <form method="get" action="invalidate.jsp">
             <input type="submit" name="submit" value="Reset session" />
         </form>
     </body>
