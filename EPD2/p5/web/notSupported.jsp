@@ -10,7 +10,6 @@
       
     <% 
         language = request.getHeader("accept-language");
-    
         if(language.indexOf("en")!=-1)
         {
           %>

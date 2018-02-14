@@ -30,12 +30,6 @@
          <jsp:forward page="firefox.jsp" />
          <%
        }
-       else if(browser.indexOf("MSIE")!=-1)
-       {
-         %>
-         <jsp:forward page="explorer.jsp" />
-         <%
-       }
        else
        {
          %>
