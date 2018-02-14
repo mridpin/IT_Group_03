@@ -7,6 +7,8 @@
 <%@page import="java.util.Arrays"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%!
+    public static int GENDER_COOKIE = 3;
+
     public boolean checkCookies(Cookie[] cookies, String[] data) {
         boolean res = true;
         int i = 0;
@@ -22,19 +24,20 @@
 
 <!DOCTYPE html>
 <%
+    // Step 1: Get data
+    String name = request.getParameter("name");
+    String lastname = request.getParameter("lastname");
+    String sex = request.getParameter("sex");
+    String[] data = new String[]{name, lastname, sex};
+    out.write("is data: " + Arrays.toString(data));
 
     if (request.getParameter("submit") != null) {
-        // Step 1: Get data
-        String name = request.getParameter("name");
-        String lastname = request.getParameter("lastname");
-        String sex = request.getParameter("sex");
-
-        String[] data = new String[]{name, lastname, sex};
-        boolean logged = checkCookies(request.getCookies(), data);
-        out.write("is data: " + Arrays.toString(data));
-        
         if (checkCookies(request.getCookies(), data)) {
-            out.write("LOGGED");
+            if (request.getCookies()[GENDER_COOKIE].getValue().equals("hombre")) {
+                response.sendRedirect("hombre.jsp");
+            } else {
+                response.sendRedirect("mujer.jsp");
+            }
         } else {
             // Step 2: Create cookies
             Cookie nameCookie = new Cookie("name", name);
@@ -48,6 +51,12 @@
             response.addCookie(nameCookie);
             response.addCookie(lastnameCookie);
             response.addCookie(sexCookie);
+
+//            if (request.getCookies()[GENDER_COOKIE].getValue().equals("hombre")) {
+//                response.sendRedirect("hombre.jsp");
+//            } else {
+//                response.sendRedirect("mujer.jsp");
+//            }
         }
     }
 %>
