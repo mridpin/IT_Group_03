@@ -5,9 +5,9 @@
 --%>
 
 <ul>
-    <li>Nombre: <%=request.getCookies()[1].getValue()%></li>
-    <li>Apellidos: <%=request.getCookies()[2].getValue()%></li>
-    <li>Sexo: <%=request.getCookies()[3].getValue()%></li>
+    <li>Nombre: <%=session.getAttribute("name")%></li>
+    <li>Apellidos: <%=session.getAttribute("lastname")%></li>
+    <li>Sexo: <%=session.getAttribute("gender")%></li>
 </ul>
 <form method="get" action="logout.jsp">
     <input type="submit" name="submit" value="Logout" />

@@ -5,9 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%    // Delete all cookies and redirect to index
-    for (Cookie c : request.getCookies()) {
-        c.setMaxAge(0);
-    }
+<%
+    session.invalidate();
     response.sendRedirect("index.jsp");
 %>
