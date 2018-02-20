@@ -31,31 +31,39 @@
                 
                 parkingSpot current = parkingSpots.get(i);
                 
+                String matricula = current.getMatricula();
+                String modelo = current.getModelo();
+                String horaEntrada = current.getHoraEntrada();
+                String horaSalida = current.getHoraSalida();
+                int tiempoPermitido = current.getTiempoPermitido();
                 
                 //We show all of the attributes of each entry
-                out.write("<tr>");
+                %>
                 
-                out.write("<td>");
-                out.write(current.getMatricula());
-                out.write("</td>");
+                <tr>
                 
-                out.write("<td>");
-                out.write(current.getModelo());
-                out.write("</td>");
+                <td>
+                <%=matricula%>
+                </td>
                 
-                out.write("<td>");
-                out.write(current.getHoraEntrada());
-                out.write("</td>");
+                <td>
+                <%=modelo%>
+                </td>
                 
-                out.write("<td>");
-                out.write(current.getHoraSalida());
-                out.write("</td>");
+                <td>
+                <%=horaEntrada%>
+                </td>
                 
-                out.write("<td>");
-                out.write(current.getTiempoPermitido());
-                out.write("</td>");
+                <td>
+                <%=horaSalida%>
+                </td>
                 
-                out.write("</tr>");
+                <td>
+                <%=tiempoPermitido%>
+                </td>
+                
+                </tr>
+                <%
     
             }
 
