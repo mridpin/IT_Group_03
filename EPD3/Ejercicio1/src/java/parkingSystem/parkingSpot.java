@@ -1,3 +1,5 @@
+package parkingSystem;
+
 public class parkingSpot {
     
     private String matricula;
