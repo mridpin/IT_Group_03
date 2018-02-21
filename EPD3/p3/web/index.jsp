@@ -1,13 +1,7 @@
-<%-- 
-    Document   : agrupaciones
-    Created on : Feb 21, 2018, 4:04:43 PM
-    Author     : ridao
---%>
-
 <%@page import="java.util.ArrayList"%>
-<%@page import="parkingSystem.ParkingSpot"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="parkingSystem.ParkingSpot"%>
+<%@page language="java" contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,15 +9,8 @@
         <title>EPD03 - P2 Grupo 3</title>
     </head>
     <body>
-        <jsp:useBean id="vBeanGarage" scope="session" class="parkingSystem.Garage"/>   
-        <h1>Agrupaciones</h1>
-        <%
-            if (request.getParameter("excedidos") != null) {
-                out.write("<h2>Parkings excedidos</h2>");
-            } else if (request.getParameter("no_excedidos") != null) {
-                out.write("<h2>Parkings no excedidos</h2>");
-            }
-        %>
+        <jsp:useBean id="vBeanGarage" scope="session" class="parkingSystem.Garage"/>     
+        <h1>Aparcamientos</h1>
         <table border="1">        
             <tr>                
                 <th>Matr&iacute;cula</th>
@@ -33,18 +20,17 @@
                 <th>Tiempo permitido</th>                
             </tr>
 
-
             <%
                 //We get all the spots in the system and them we show them
                 List<ParkingSpot> parkingSpots = vBeanGarage.currentSpots();
-                List<ParkingSpot> filteredParking = new ArrayList<>();
-                if (request.getParameter("excedidos") != null) {
-                    filteredParking.addAll(vBeanGarage.getCochesExcedidos(parkingSpots));
-                } else if (request.getParameter("no_excedidos") != null) {
-                    filteredParking.addAll(vBeanGarage.getCochesNoExcedidos(parkingSpots));
+                if (request.getParameter("submit_busqueda") != null) {
+                    List<ParkingSpot> resultados = vBeanGarage.buscar(request.getParameter("busqueda"), parkingSpots);
+                    parkingSpots.clear();
+                    parkingSpots.addAll(resultados);
                 }
-                for (int i = 0; i < filteredParking.size(); i++) {
-                    ParkingSpot current = filteredParking.get(i);
+
+                for (int i = 0; i < parkingSpots.size(); i++) {
+                    ParkingSpot current = parkingSpots.get(i);
 
                     String matricula = current.getMatricula();
                     String modelo = current.getModelo();
@@ -53,7 +39,7 @@
                     int tiempoPermitido = current.getTiempoPermitido();
 
                     //We show all of the attributes of each entry
-            %>
+%>
 
             <tr>
                 <td>
@@ -78,12 +64,18 @@
         </table>
         <br />
         <form action="agrupaciones.jsp" method="get">
-            <input type="submit" name="excedidos" value="Ver Excedidos">
-            <input type="submit" name="no_excedidos" value="Ver No Excedidos">
+            <input type="submit" name="submit" value="Ver Agrupaciones">
         </form>
         <br />
+        <h3>Buscar si la matr&iacute;cula comienza por:</h3>
         <form action="index.jsp" method="get">
-            <input type="submit" name="todos" value="Ver Todos">
+            <input type="text" name="busqueda">
+            <input type="submit" name="submit_busqueda" value="Buscar">
+        </form>
+        <br />
+        <h3>Ver todos</h3>
+        <form action="index.jsp" method="get">
+            <input type="submit" name="ver_todos" value="Ver todos">
         </form>
     </body>
 </html>
