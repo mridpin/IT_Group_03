@@ -97,4 +97,14 @@ public class Garage {
         }
         return list;
     }
+
+    public static List<ParkingSpot> enAparcamiento(List<ParkingSpot> parking) {
+        List<ParkingSpot> list = new ArrayList<>();
+        for (ParkingSpot park : parking) {
+            if ("--".equals(park.getHoraSalida())) {
+                list.add(park);
+            }
+        }
+        return list;
+    }
 }

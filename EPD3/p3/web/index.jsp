@@ -23,8 +23,12 @@
             <%
                 //We get all the spots in the system and them we show them
                 List<ParkingSpot> parkingSpots = vBeanGarage.currentSpots();
-                if (request.getParameter("submit_busqueda") != null) {
+                if (request.getParameter("submit_busqueda_matricula") != null) {
                     List<ParkingSpot> resultados = vBeanGarage.buscar(request.getParameter("busqueda"), parkingSpots);
+                    parkingSpots.clear();
+                    parkingSpots.addAll(resultados);
+                } else if (request.getParameter("submit_busqueda_todavia_aparcamiento") != null) {
+                    List<ParkingSpot> resultados = vBeanGarage.enAparcamiento(parkingSpots);
                     parkingSpots.clear();
                     parkingSpots.addAll(resultados);
                 }
@@ -67,10 +71,15 @@
             <input type="submit" name="submit" value="Ver Agrupaciones">
         </form>
         <br />
-        <h3>Buscar si la matr&iacute;cula comienza por:</h3>
+
+        <h3>B&uacute;squedas</h3>        
         <form action="index.jsp" method="get">
-            <input type="text" name="busqueda">
-            <input type="submit" name="submit_busqueda" value="Buscar">
+            <label>Buscar si la matr&iacute;cula comienza por: </label><input type="text" name="busqueda">
+            <input type="submit" name="submit_busqueda_matricula" value="Buscar">
+        </form>
+        <form action="index.jsp" method="get">
+            <label>Buscar veh&iacute;culos todav&iacute;a en el aparcamiento: </label>
+            <input type="submit" name="submit_busqueda_todavia_aparcamiento" value="Buscar">
         </form>
         <br />
         <h3>Ver todos</h3>
