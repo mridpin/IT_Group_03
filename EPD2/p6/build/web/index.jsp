@@ -32,10 +32,14 @@
                 response.sendRedirect("mujer.jsp");
             }
         } else {
-            // Step 2: Create session
-            session.setAttribute("name", name);
-            session.setAttribute("lastname", lastname);
-            session.setAttribute("gender", sex);
+            if (!"".equals(name) && !"".equals(lastname) && sex!=null) {
+                // Step 2: Create session
+                session.setAttribute("name", name);
+                session.setAttribute("lastname", lastname);
+                session.setAttribute("gender", sex);
+            } else {
+                data = new String[]{"Valores de la sesi&oacute;n no v&aacute;lidos"};
+            }
         }
     }
 %>

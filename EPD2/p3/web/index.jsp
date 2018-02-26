@@ -48,21 +48,21 @@
                 response.sendRedirect("mujer.jsp");
             }
         } else {
-            // Step 2: Create cookies
-            Cookie nameCookie = new Cookie("name", name);
-            nameCookie.setMaxAge(60 * 60);
-            response.addCookie(nameCookie);
+            if (!"".equals(name) && !"".equals(lastname) && sex!=null) {
+                Cookie nameCookie = new Cookie("name", name);
+                nameCookie.setMaxAge(60 * 60);
+                response.addCookie(nameCookie);
 
-            Cookie lastnameCookie = new Cookie("lastname", lastname);
-            lastnameCookie.setMaxAge(60 * 60);
-            response.addCookie(lastnameCookie);
+                Cookie lastnameCookie = new Cookie("lastname", lastname);
+                lastnameCookie.setMaxAge(60 * 60);
+                response.addCookie(lastnameCookie);
 
-            Cookie sexCookie = new Cookie("sex", sex);
-            sexCookie.setMaxAge(60 * 60);
-            response.addCookie(sexCookie);
-            // Step 3: Set duration (1 hour)
-
-            // Step 4: Send the cookie to response Object
+                Cookie sexCookie = new Cookie("sex", sex);
+                sexCookie.setMaxAge(60 * 60);
+                response.addCookie(sexCookie);
+            } else {
+                data = new String[]{"Valores de las cookies no v&aacute;lidos"};
+            }
         }
     }
 %>

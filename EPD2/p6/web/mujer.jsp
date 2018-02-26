@@ -11,7 +11,7 @@
     </head>
     <body>
         <h1>IT - EPD02 - P6</h1>
-        <h2>Cookies de mujer</h2>
+        <h2>Sesi&oacute; de mujer</h2>
         <%@ include file="welcome.jsp" %>
     </body>
 </html>
