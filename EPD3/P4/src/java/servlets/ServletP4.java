@@ -50,12 +50,12 @@ public class ServletP4 extends HttpServlet {
             } else if (request.getParameter("Accion2") != null) {
                  url = "/agrupaciones.jsp";
                 if (request.getParameter("excedidos") != null) {
+                    
+                    filteredParking= Garage.getCochesExcedidos(parkingSpots);
                     session.setAttribute("excedidos", "excedidos");
-                    filteredParking.addAll(Garage.getCochesExcedidos(parkingSpots));
                 }else if (request.getParameter("no_excedidos") != null) {
                     session.setAttribute("no_excedidos", "no_excedidos");
-                    filteredParking.addAll(Garage.getCochesNoExcedidos(parkingSpots));
-                    
+                    filteredParking=Garage.getCochesNoExcedidos(parkingSpots);
                 }
                 session.setAttribute("lista", filteredParking);
             }

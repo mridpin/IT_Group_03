@@ -78,7 +78,7 @@
         </form>
         <br />
         <form action="index.jsp" method="get">
-            <input type="hidden" name="Accion1" value="index">
+            <input type="hidden" name="Accion3" value="index">
             <input type="submit" name="todos" value="Ver Todos">
         </form>
     </body>

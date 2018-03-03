@@ -93,7 +93,7 @@
         <br />
         <h3>Ver todos</h3>
         <form action="ServletP4" method="get">
-            <input type="hidden" name="Accion1" value="index">
+            <input type="hidden" name="Accion3" value="index">
             <input type="submit" name="ver_todos" value="Ver todos">
         </form>
     </body>
