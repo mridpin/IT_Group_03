@@ -1,9 +1,6 @@
-<%-- 
-    Document   : agrupaciones
-    Created on : Feb 21, 2018, 4:04:43 PM
-    Author     : ridao
---%>
 
+
+<%@page import="parkingSystem.Garage"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="parkingSystem.ParkingSpot"%>
 <%@page import="java.util.List"%>
@@ -14,8 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>EPD03 - P2 Grupo 3</title>
     </head>
-    <body>
-        <jsp:useBean id="vBeanGarage" scope="session" class="parkingSystem.Garage"/>   
+    <body> 
         <h1>Agrupaciones</h1>
         <%
             if (request.getParameter("excedidos") != null) {
@@ -35,10 +31,13 @@
 
 
             <%
+                List<ParkingSpot> filteredParking = new ArrayList();
+                 List<ParkingSpot> parkingSpots = Garage.currentSpots();
                 //We get all the spots in the system and them we show them
                 ///List<ParkingSpot> parkingSpots = vBeanGarage.currentSpots();
                 if(session.getAttribute("lista")!=null){
-                List<ParkingSpot> filteredParking = (List)session.getAttribute("lista");
+                 filteredParking = (List)session.getAttribute("lista");
+                
                 for (int i = 0; i < filteredParking.size(); i++) {
                     ParkingSpot current = filteredParking.get(i);
 
@@ -75,14 +74,14 @@
             %>
         </table>
         <br />
-        <form action="agrupaciones.jsp" method="get">
+        <form action="ServletP4" method="get">
             <input type="hidden" name="Accion2" value="agrupaciones">
             <input type="submit" name="excedidos" value="Ver Excedidos">
             <input type="submit" name="no_excedidos" value="Ver No Excedidos">
         </form>
         <br />
-        <form action="index.jsp" method="get">
-            <input type="hidden" name="Accion1" value="index">
+        <form action="ServletP4" method="get">
+            <input type="hidden" name="Accion3" value="index">
             <input type="submit" name="todos" value="Ver Todos">
         </form>
     </body>

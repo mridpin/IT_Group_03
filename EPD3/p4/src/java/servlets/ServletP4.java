@@ -19,10 +19,7 @@ import javax.servlet.http.HttpSession;
 import parkingSystem.Garage;
 import parkingSystem.ParkingSpot;
 
-/**
- *
- * @author Raistlyn
- */
+
 public class ServletP4 extends HttpServlet {
 
     /**
@@ -53,14 +50,15 @@ public class ServletP4 extends HttpServlet {
             } else if (request.getParameter("Accion2") != null) {
                  url = "/agrupaciones.jsp";
                 if (request.getParameter("excedidos") != null) {
-                    session.setAttribute("excedidos", "excedidos");
-                    filteredParking.addAll(Garage.getCochesExcedidos(parkingSpots));
-                }else if (request.getParameter("no_excedidos") != null) {
-                    session.setAttribute("no_excedidos", "no_excedidos");
-                    filteredParking.addAll(Garage.getCochesNoExcedidos(parkingSpots));
                     
+                    filteredParking= Garage.getCochesExcedidos(parkingSpots);
+                    session.setAttribute("excedidos", filteredParking);
+                }else if (request.getParameter("no_excedidos") != null) {
+                   
+                    filteredParking=Garage.getCochesNoExcedidos(parkingSpots);
+                     session.setAttribute("no_excedidos", filteredParking);
                 }
-                session.setAttribute("lista", filteredParking);
+                session.setAttribute("lista",filteredParking);
             }
             
             session.setAttribute("action", "controlador");

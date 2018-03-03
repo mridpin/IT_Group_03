@@ -1,3 +1,4 @@
+<%@page import="parkingSystem.Garage"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="parkingSystem.ParkingSpot"%>
@@ -9,7 +10,7 @@
         <title>EPD03 - P2 Grupo 3</title>
     </head>
     <body>
-        <jsp:useBean id="vBeanGarage" scope="session" class="parkingSystem.Garage"/>     
+    
         <h1>Aparcamientos</h1>
         <table border="1">        
             <tr>                
@@ -22,8 +23,11 @@
 
             <%
                 //We get all the spots in the system and them we show them
+                if(request.getParameter("Accion3")!= null){
+                    session.setAttribute("lista", null);
+                }
                 List<ParkingSpot> resultados  = new ArrayList();
-                List<ParkingSpot> parkingSpots = vBeanGarage.currentSpots();
+                List<ParkingSpot> parkingSpots = Garage.currentSpots();
                 if(session.getAttribute("lista")!=null){
                     resultados = (List)session.getAttribute("lista");
                     parkingSpots.clear();
@@ -89,7 +93,7 @@
         <br />
         <h3>Ver todos</h3>
         <form action="ServletP4" method="get">
-            <input type="hidden" name="Accion1" value="index">
+            <input type="hidden" name="Accion3" value="index">
             <input type="submit" name="ver_todos" value="Ver todos">
         </form>
     </body>
