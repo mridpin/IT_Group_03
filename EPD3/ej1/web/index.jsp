@@ -1,5 +1,5 @@
 <%@page import="java.util.List"%>
-<%@page import="parkingSystem.parkingSpot"%>
+<%@page import="parkingSystem.ParkingSpot"%>
 <%@page language="java" contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -8,7 +8,7 @@
         <title>EPD03 - EJ1 Grupo 3</title>
     </head>
     <body>
-        <jsp:useBean id="vBeanGarage" scope="session" class="parkingSystem.garage"/>
+        <jsp:useBean id="vBeanGarage" scope="session" class="parkingSystem.Garage"/>
         
         <table border="1">
         
@@ -24,12 +24,12 @@
             
         <% 
             //We get all the spots in the system and them we show them
-            List<parkingSpot> parkingSpots = vBeanGarage.currentSpots();
+            List<ParkingSpot> parkingSpots = vBeanGarage.currentSpots();
 
             for(int i=0;i<parkingSpots.size();i++)
             {
                 
-                parkingSpot current = parkingSpots.get(i);
+                ParkingSpot current = parkingSpots.get(i);
                 
                 String matricula = current.getMatricula();
                 String modelo = current.getModelo();

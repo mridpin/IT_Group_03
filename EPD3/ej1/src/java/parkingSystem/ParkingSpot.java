@@ -1,6 +1,6 @@
 package parkingSystem;
 
-public class parkingSpot {
+public class ParkingSpot {
     
     private String matricula;
     private String modelo;

@@ -4,14 +4,14 @@ package parkingSystem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class garage {
+public class Garage {
     
     
-    public static List<parkingSpot> currentSpots()
+    public static List<ParkingSpot> currentSpots()
     {
-        List<parkingSpot> list = new ArrayList<parkingSpot>();
+        List<ParkingSpot> list = new ArrayList<ParkingSpot>();
         
-        parkingSpot entry1 = new parkingSpot();
+        ParkingSpot entry1 = new ParkingSpot();
         entry1.setMatricula("12784HIH");
         entry1.setModelo("BMW");
         entry1.setHoraEntrada("10:05");
@@ -19,7 +19,7 @@ public class garage {
         entry1.setTiempoPermitido(30);
         list.add(entry1);
         
-        parkingSpot entry2 = new parkingSpot();
+        ParkingSpot entry2 = new ParkingSpot();
         entry2.setMatricula("76234AAC");
         entry2.setModelo("Toyota");
         entry2.setHoraEntrada("10:07");
@@ -27,7 +27,7 @@ public class garage {
         entry2.setTiempoPermitido(30);
         list.add(entry2);
         
-        parkingSpot entry3 = new parkingSpot();
+        ParkingSpot entry3 = new ParkingSpot();
         entry3.setMatricula("32162BAQ");
         entry3.setModelo("Audi");
         entry3.setHoraEntrada("10:45");
@@ -35,7 +35,7 @@ public class garage {
         entry3.setTiempoPermitido(90);
         list.add(entry3);
         
-        parkingSpot entry4 = new parkingSpot();
+        ParkingSpot entry4 = new ParkingSpot();
         entry4.setMatricula("87823CDA");
         entry4.setModelo("Mercedes");
         entry4.setHoraEntrada("10:46");
