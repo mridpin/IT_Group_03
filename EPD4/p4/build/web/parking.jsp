@@ -31,8 +31,8 @@
 
                         %>                         
                         <td>
-                            <form method="get" action="ParkingSpotCRUDServlet" name="form"></form>
-                            <input type="text" name="matricula" value="<%=((ParkingSpot) session.getAttribute("parkingSpot")).getMatricula()%>">
+                            <form method="get" action="ParkingSpotCRUDServlet" id="form"></form>
+                            <input type="text" name="matricula" disabled="disabled" value="<%=((ParkingSpot) session.getAttribute("parkingSpot")).getMatricula()%>">
                         </td>
                         <td>
                             <input type="text" name="modelo" form="form" value="<%=((ParkingSpot) session.getAttribute("parkingSpot")).getModelo()%>">

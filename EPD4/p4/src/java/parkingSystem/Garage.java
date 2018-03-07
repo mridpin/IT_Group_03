@@ -3,6 +3,8 @@ package parkingSystem;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Garage {
 
@@ -71,5 +73,13 @@ public class Garage {
             }
         }
         return list;
+    }
+
+    public static void updateParking(ParkingSpot parking) {
+        try {
+            PersistenciaJDBC.updateParking(parking.getMatricula(), parking.getModelo(), parking.getHoraEntrada(), parking.getHoraSalida(), parking.getTiempoPermitido());
+        } catch (SQLException ex) {
+            Logger.getLogger(Garage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

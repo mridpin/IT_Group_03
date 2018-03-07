@@ -54,7 +54,7 @@ public class ParkingSpotCRUDServlet extends HttpServlet {
         } else if (request.getParameter("guardar") != null) {
             ParkingSpot parking = new ParkingSpot(request.getParameter("matricula"), request.getParameter("modelo"), request.getParameter("entrada"), request.getParameter("salida"), Integer.parseInt(request.getParameter("tiempo")));
             Garage.updateParking(parking);
-            url = "index.jsp";
+            url = "/index.jsp";
         }
 
         session.setAttribute("action", "controlador");
