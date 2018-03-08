@@ -19,6 +19,12 @@
                 <th>Hora de entrada</th>
                 <th>Hora de salida</th>
                 <th>Tiempo permitido</th>                
+                <th>
+                    <form action="ParkingSpotCRUDServlet" method="get" style="display:inline;">
+                        <input type="hidden" name="crear" value="crear">
+                        <button type="submit" name="submit" value="crear"><img src="imgs/add.png" alt="crear" width="40px"></button>
+                    </form>
+                </th>                
             </tr>
 
             <%
@@ -66,10 +72,15 @@
                     <%=tiempoPermitido%>
                 </td>
                 <td>
-                    <form action="ParkingSpotCRUDServlet" method="get">
+                    <form action="ParkingSpotCRUDServlet" method="get" style="display:inline;">
                         <input type="hidden" name="editar" value="editar">
                         <input type="hidden" name="indice" value="<%=i%>">
-                        <button type="submit" name="submit" value="Ver Agrupaciones"><img src="imgs/edit.png" alt="edit" width="20px"></button>
+                        <button type="submit" name="submit" value="editar"><img src="imgs/edit.png" alt="edit" width="20px"></button>
+                    </form>
+                    <form action="ParkingSpotCRUDServlet" method="get" style="display:inline;">
+                        <input type="hidden" name="borrar" value="borrar">
+                        <input type="hidden" name="indice" value="<%=i%>">
+                        <button type="submit" name="submit" value="borrar"><img src="imgs/cancel.png" alt="delete" width="20px"></button>
                     </form>
                 </td>
             </tr>

@@ -43,17 +43,26 @@ public class ParkingSpotCRUDServlet extends HttpServlet {
 
         if (request.getParameter("editar") != null) {
             ParkingSpot parking = null;
-            try {
-                // Mostramos el parking que se va a editar usando el indice del formulario para cogerlo de la lista que devuelve el modelo
-                parking = Garage.currentSpots().get(Integer.parseInt(request.getParameter("indice")));
-            } catch (SQLException ex) {
-                Logger.getLogger(ParkingSpotCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            // Mostramos el parking que se va a editar usando el indice del formulario para cogerlo de la lista que devuelve el modelo
+            parking = Garage.currentSpots().get(Integer.parseInt(request.getParameter("indice")));
             // Pasamos los datos a traves de variable de sesion
             session.setAttribute("parkingSpot", parking);
         } else if (request.getParameter("guardar") != null) {
             ParkingSpot parking = new ParkingSpot(request.getParameter("matricula"), request.getParameter("modelo"), request.getParameter("entrada"), request.getParameter("salida"), Integer.parseInt(request.getParameter("tiempo")));
             Garage.updateParking(parking);
+            url = "/index.jsp";
+        } else if (request.getParameter("borrar") != null) {
+            int i = Integer.parseInt(request.getParameter("indice"));
+            // El controlador pide al modelo todos los parking y se queda con el que indica el indice pasado por formulario
+            ParkingSpot parking = Garage.currentSpots().get(i);
+            Garage.deleteParking(parking);
+            url = "/index.jsp";
+        } else if (request.getParameter("crear") != null) {
+            // Redireccionamos a parking.jsp manteniendo el parameter crear para distinguir alli los formularios de crear y editar
+        } else if (request.getParameter("anyadir") != null) {
+            // Tomamos los datos del formulario y los añadimos a la db
+            ParkingSpot parking = new ParkingSpot(request.getParameter("matricula"), request.getParameter("modelo"), request.getParameter("entrada"), request.getParameter("salida"), Integer.parseInt(request.getParameter("tiempo")));
+            Garage.createParking(parking);
             url = "/index.jsp";
         }
 

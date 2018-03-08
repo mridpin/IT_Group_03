@@ -71,16 +71,44 @@ public class PersistenciaJDBC {
         return parking;
     }
 
-    static void updateParking(String matricula, String modelo, String horaEntrada, String horaSalida, int tiempoPermitido) throws SQLException {
+    static void updateParking(String matricula, String modelo, int horaEntrada, String horaSalida, int tiempoPermitido) throws SQLException {
         // Paso 1: Crear connection
         Connection conexion = DriverManager.getConnection(url, usuario, clave);
         // Paso 2: Crear statement
         Statement solicitud = (Statement) conexion.createStatement();
         // Paso 3: Ejecutar query con el statement
-        String sql = "UPDATE parking SET modelo='"+modelo+"', entrada='"+horaEntrada+"', salida='"+horaSalida+"', tiempo_permitido='"+tiempoPermitido+"' WHERE matricula='"+matricula+"'";
-        ResultSet resultados = solicitud.executeQuery(sql);
+        String sql = "UPDATE parking SET modelo='" + modelo + "', entrada='" + horaEntrada + "', salida='" + horaSalida + "', tiempo_permitido='" + tiempoPermitido + "' WHERE matricula='" + matricula + "'";
+        // executeQuery no funciona con insert, update, delete. https://stackoverflow.com/questions/1905607/cannot-issue-data-manipulation-statements-with-executequery
+        solicitud.executeUpdate(sql);
 
-        resultados.close();
+        solicitud.close();
+        conexion.close();
+    }
+
+    static void deleteParking(String matricula) throws SQLException {
+        // Paso 1: Crear connection
+        Connection conexion = DriverManager.getConnection(url, usuario, clave);
+        // Paso 2: Crear statement
+        Statement solicitud = (Statement) conexion.createStatement();
+        // Paso 3: Ejecutar query con el statement
+        String sql = "DELETE FROM parking WHERE matricula='" + matricula + "'";
+        // executeQuery no funciona con insert, update, delete. https://stackoverflow.com/questions/1905607/cannot-issue-data-manipulation-statements-with-executequery
+        solicitud.executeUpdate(sql);
+
+        solicitud.close();
+        conexion.close();
+    }
+
+    static void createParking(String matricula, String modelo, int entrada, String salida, int tiempoPermitido) throws SQLException {
+        // Paso 1: Crear connection
+        Connection conexion = DriverManager.getConnection(url, usuario, clave);
+        // Paso 2: Crear statement
+        Statement solicitud = (Statement) conexion.createStatement();
+        // Paso 3: Ejecutar query con el statement
+        String sql = "INSERT INTO parking (matricula, modelo, entrada, salida, tiempo_permitido) VALUES ('"+matricula+"', '"+modelo+"', '"+entrada+"', '"+salida+"', '"+tiempoPermitido+"')";
+        // executeQuery no funciona con insert, update, delete. https://stackoverflow.com/questions/1905607/cannot-issue-data-manipulation-statements-with-executequery
+        solicitud.executeUpdate(sql);
+
         solicitud.close();
         conexion.close();
     }
