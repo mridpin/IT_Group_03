@@ -48,7 +48,7 @@
 
                         String matricula = current.getMatricula();
                         String modelo = current.getModelo();
-                        String horaEntrada = current.getHoraEntrada();
+                        String horaEntrada = String.valueOf(current.getHoraEntrada());
                         String horaSalida = current.getHoraSalida();
                         int tiempoPermitido = current.getTiempoPermitido();
 

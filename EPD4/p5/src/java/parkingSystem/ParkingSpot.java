@@ -16,14 +16,14 @@ public class ParkingSpot  implements java.io.Serializable {
      // donde está definido como String, para no tener que cambiar ni castear todos los métodos relacionados 
      // con esta clase construidos hasta ahora. Por este motivo, tambien se han
      // renombrado los metodos getter y setter de entrada y salida para que incluyan "hora".
-     private String entrada;
+     private int entrada;
      private String salida;
      private int tiempoPermitido;
 
     public ParkingSpot() {
     }
 
-    public ParkingSpot(String matricula, String modelo, String entrada, String salida, int tiempoPermitido) {
+    public ParkingSpot(String matricula, String modelo, int entrada, String salida, int tiempoPermitido) {
        this.matricula = matricula;
        this.modelo = modelo;
        this.entrada = entrada;
@@ -45,11 +45,11 @@ public class ParkingSpot  implements java.io.Serializable {
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }
-    public String getHoraEntrada() {
+    public int getHoraEntrada() {
         return this.entrada;
     }
     
-    public void setHoraEntrada(String entrada) {
+    public void setHoraEntrada(int entrada) {
         this.entrada = entrada;
     }
     public String getHoraSalida() {

@@ -7,12 +7,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Garage {
+    
+    private static PersistenciaJDBC dao = new PersistenciaJDBC();
+
 
     // Devuelve todos los coches en el aparcamiento
     public static List<ParkingSpot> currentSpots() {
         List<ParkingSpot> list = null;
         try {
-            list = PersistenciaJDBC.currentSpots();
+            list = dao.currentSpots();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,8 +51,8 @@ public class Garage {
             // horasalida - horaentrada > tiempo permitido ==> excedido
             String[] horaSalida = parking.getHoraSalida().split(":");
             int salida = Integer.parseInt(horaSalida[1]) + Integer.parseInt(horaSalida[0]) * 60;
-            String[] horaEntrada = parking.getHoraEntrada().split(":");
-            int entrada = Integer.parseInt(horaEntrada[1]) + Integer.parseInt(horaEntrada[0]) * 60;
+            int horaEntrada = parking.getHoraEntrada();
+            int entrada = horaEntrada / 60 + (horaEntrada % 60);
             res = salida - entrada > parking.getTiempoPermitido();
         }
         return res;
@@ -77,15 +80,7 @@ public class Garage {
 
     public static void updateParking(ParkingSpot parking) {
         try {
-            int entrada = Integer.parseInt(parking.getHoraEntrada().split(":")[1]) + Integer.parseInt(parking.getHoraEntrada().split(":")[0]) * 60;
-            String salida = "";
-            if (!parking.getHoraSalida().equals("--")) {
-                Integer salidaMinutos = (Integer.parseInt(parking.getHoraSalida().split(":")[0]) * 60) + Integer.parseInt(parking.getHoraSalida().split(":")[1]);
-                salida = salidaMinutos.toString();
-            } else {
-                salida = "--";
-            }
-            PersistenciaJDBC.updateParking(parking.getMatricula(), parking.getModelo(), entrada, salida, parking.getTiempoPermitido());
+            dao.updateParking(parking);
         } catch (SQLException ex) {
             Logger.getLogger(Garage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -93,23 +88,15 @@ public class Garage {
 
     public static void deleteParking(ParkingSpot parking) {
         try {
-            PersistenciaJDBC.deleteParking(parking.getMatricula());
+            dao.deleteParking(parking);
         } catch (SQLException ex) {
             Logger.getLogger(Garage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public static void createParking(ParkingSpot parking) {
-        int entrada = Integer.parseInt(parking.getHoraEntrada().split(":")[1]) + Integer.parseInt(parking.getHoraEntrada().split(":")[0]) * 60;
-        String salida = "";
-        if (!parking.getHoraSalida().equals("--")) {
-            Integer salidaMinutos = (Integer.parseInt(parking.getHoraSalida().split(":")[0]) * 60) + Integer.parseInt(parking.getHoraSalida().split(":")[1]);
-            salida = salidaMinutos.toString();
-        } else {
-            salida = "--";
-        }
         try {
-            PersistenciaJDBC.createParking(parking.getMatricula(), parking.getModelo(), entrada, salida, parking.getTiempoPermitido());
+            dao.createParking(parking);
         } catch (SQLException ex) {
             Logger.getLogger(Garage.class.getName()).log(Level.SEVERE, null, ex);
         }

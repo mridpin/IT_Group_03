@@ -46,7 +46,15 @@ public class ParkingSpotCRUDServlet extends HttpServlet {
             // Pasamos los datos a traves de variable de sesion
             session.setAttribute("parkingSpot", parking);
         } else if (request.getParameter("guardar") != null) {
-            ParkingSpot parking = new ParkingSpot(request.getParameter("matricula"), request.getParameter("modelo"), request.getParameter("entrada"), request.getParameter("salida"), Integer.parseInt(request.getParameter("tiempo")));
+            int entrada = Integer.parseInt(request.getParameter("entrada").split(":")[1]) + Integer.parseInt(request.getParameter("entrada").split(":")[0]) * 60;
+            String salida = "";
+            if (!request.getParameter("salida").equals("--")) {
+                Integer salidaMinutos = (Integer.parseInt(request.getParameter("salida").split(":")[0]) * 60) + Integer.parseInt(request.getParameter("salida").split(":")[1]);
+                salida = salidaMinutos.toString();
+            } else {
+                salida = "--";
+            }
+            ParkingSpot parking = new ParkingSpot(request.getParameter("matricula"), request.getParameter("modelo"), entrada, salida, Integer.parseInt(request.getParameter("tiempo")));
             Garage.updateParking(parking);
             url = "/index.jsp";
         } else if (request.getParameter("borrar") != null) {
@@ -59,7 +67,15 @@ public class ParkingSpotCRUDServlet extends HttpServlet {
             // Redireccionamos a parking.jsp manteniendo el parameter crear para distinguir alli los formularios de crear y editar
         } else if (request.getParameter("anyadir") != null) {
             // Tomamos los datos del formulario y los añadimos a la db
-            ParkingSpot parking = new ParkingSpot(request.getParameter("matricula"), request.getParameter("modelo"), request.getParameter("entrada"), request.getParameter("salida"), Integer.parseInt(request.getParameter("tiempo")));
+            int entrada = Integer.parseInt(request.getParameter("entrada").split(":")[1]) + Integer.parseInt(request.getParameter("entrada").split(":")[0]) * 60;
+            String salida = "";
+            if (!request.getParameter("salida").equals("--")) {
+                Integer salidaMinutos = (Integer.parseInt(request.getParameter("salida").split(":")[0]) * 60) + Integer.parseInt(request.getParameter("salida").split(":")[1]);
+                salida = salidaMinutos.toString();
+            } else {
+                salida = "--";
+            }
+            ParkingSpot parking = new ParkingSpot(request.getParameter("matricula"), request.getParameter("modelo"), entrada, salida, Integer.parseInt(request.getParameter("tiempo")));
             Garage.createParking(parking);
             url = "/index.jsp";
         }
