@@ -2,7 +2,7 @@
 
 <%@page import="parkingSystem.Garage"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="parkingSystem.ParkingSpot"%>
+<%@page import="parkingSystem.Parking"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -31,23 +31,23 @@
 
 
             <%
-                List<ParkingSpot> filteredParking = new ArrayList();
-                 List<ParkingSpot> parkingSpots = Garage.currentSpots();
+                List<Parking> filteredParking = new ArrayList();
+                 List<Parking> Parkings = Garage.currentSpots();
                 //We get all the spots in the system and them we show them
-                ///List<ParkingSpot> parkingSpots = vBeanGarage.currentSpots();
+                ///List<Parking> Parkings = vBeanGarage.currentSpots();
                 if(session.getAttribute("lista")!=null){
                  filteredParking = (List)session.getAttribute("lista");
                 
                 for (int i = 0; i < filteredParking.size(); i++) {
-                    ParkingSpot current = filteredParking.get(i);
-
+                    Parking current = filteredParking.get(i);
                     String matricula = current.getMatricula();
                     String modelo = current.getModelo();
-                    String horaEntrada = current.getHoraEntrada();
-                    String horaSalida = current.getHoraSalida();
+                    int entrada = current.getEntrada();
+                    // Turn 60/h+min integer into hh:mm with 2 digit padding
+                    String horaEntrada = String.format("%02d", (entrada/60)) + ":" + String.format("%02d", (entrada%60));
+                    int salida = (current.getSalida().matches("\\d+")) ? Integer.parseInt(current.getSalida()) : -1;
+                    String horaSalida = (salida!=-1) ? String.format("%02d", (salida/60)) + ":" + String.format("%02d", (salida%60)) : "--";
                     int tiempoPermitido = current.getTiempoPermitido();
-                
-
                     //We show all of the attributes of each entry
             %>
 

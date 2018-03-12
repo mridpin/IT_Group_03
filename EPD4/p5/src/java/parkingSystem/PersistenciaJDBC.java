@@ -5,8 +5,6 @@
  */
 package parkingSystem;
 
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.hibernate.HibernateException;
@@ -28,7 +26,7 @@ public class PersistenciaJDBC {
     }
 
     // Metodo que devuelve una lista resultado de hacer un SELECT a la bbdd
-    public List<ParkingSpot> currentSpots() throws SQLException {
+    public List<Parking> currentSpots() throws SQLException {
         // Paso 1: get la current sesion
         hs = NewHibernateUtil.getSessionFactory().getCurrentSession();
         // Paso 2: comenzar transaccion
@@ -36,7 +34,7 @@ public class PersistenciaJDBC {
         // Paso 3: crear query
         Query query = hs.createQuery("From Parking");
         // Paso 4: recoger resultados
-        List<ParkingSpot> lista = query.list();
+        List<Parking> lista = query.list();
         // Paso 5: commit
         tx.commit();
         return lista;
@@ -60,7 +58,7 @@ public class PersistenciaJDBC {
 //        return parking;
 //    }
 
-    void updateParking(ParkingSpot parking) throws SQLException {
+    void updateParking(Parking parking) throws SQLException {
         // Paso 1: get la current sesion
         hs = NewHibernateUtil.getSessionFactory().getCurrentSession();
         // Paso 2: comenzar transaccion
@@ -80,7 +78,7 @@ public class PersistenciaJDBC {
         }
     }
 
-    void deleteParking(ParkingSpot parking) throws SQLException {
+    void deleteParking(Parking parking) throws SQLException {
         // Paso 1: get la current sesion
         hs = NewHibernateUtil.getSessionFactory().getCurrentSession();
         // Paso 2: comenzar transaccion
@@ -91,7 +89,7 @@ public class PersistenciaJDBC {
         tx.commit();
     }
 
-    void createParking(ParkingSpot parking) throws SQLException {        
+    void createParking(Parking parking) throws SQLException {        
         // Paso 1: get la current sesion
         hs = NewHibernateUtil.getSessionFactory().getCurrentSession();
         // Paso 2: comenzar transaccion

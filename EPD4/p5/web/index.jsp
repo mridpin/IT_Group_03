@@ -1,7 +1,7 @@
 <%@page import="parkingSystem.Garage"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="parkingSystem.ParkingSpot"%>
+<%@page import="parkingSystem.Parking"%>
 <%@page language="java" contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -20,7 +20,7 @@
                 <th>Hora de salida</th>
                 <th>Tiempo permitido</th>                
                 <th>
-                    <form action="ParkingSpotCRUDServlet" method="get" style="display:inline;">
+                    <form action="ParkingCRUDServlet" method="get" style="display:inline;">
                         <input type="hidden" name="crear" value="crear">
                         <button type="submit" name="submit" value="crear"><img src="imgs/add.png" alt="crear" width="40px"></button>
                     </form>
@@ -32,28 +32,31 @@
                 if (request.getParameter("Accion3") != null) {
                     session.setAttribute("lista", null);
                 }
-                List<ParkingSpot> resultados = new ArrayList();
-                List<ParkingSpot> parkingSpots = Garage.currentSpots();
+                List<Parking> resultados = new ArrayList();
+                List<Parking> Parkings = Garage.currentSpots();
                 if (session.getAttribute("lista") != null) {
                     resultados = (List) session.getAttribute("lista");
-                    parkingSpots.clear();
-                    parkingSpots.addAll(resultados);
+                    Parkings.clear();
+                    Parkings.addAll(resultados);
                 }
                 String action = (String) session.getAttribute("action");
                 if (action == null) {
                     response.sendRedirect("ServletP4");
                 } else {
-                    for (int i = 0; i < parkingSpots.size(); i++) {
-                        ParkingSpot current = parkingSpots.get(i);
+                    for (int i = 0; i < Parkings.size(); i++) {
+                        Parking current = Parkings.get(i);
 
                         String matricula = current.getMatricula();
                         String modelo = current.getModelo();
-                        String horaEntrada = String.valueOf(current.getHoraEntrada());
-                        String horaSalida = current.getHoraSalida();
+                        int entrada = current.getEntrada();
+                        // Turn 60/h+min integer into hh:mm with 2 digit padding
+                        String horaEntrada = String.format("%02d", (entrada / 60)) + ":" + String.format("%02d", (entrada % 60));
+                        int salida = (current.getSalida().matches("\\d+")) ? Integer.parseInt(current.getSalida()) : -1;
+                        String horaSalida = (salida != -1) ? String.format("%02d", (salida / 60)) + ":" + String.format("%02d", (salida % 60)) : "--";
                         int tiempoPermitido = current.getTiempoPermitido();
 
                         //We show all of the attributes of each entry
-            %>
+%>
 
             <tr>
                 <td>
@@ -72,12 +75,12 @@
                     <%=tiempoPermitido%>
                 </td>
                 <td>
-                    <form action="ParkingSpotCRUDServlet" method="get" style="display:inline;">
+                    <form action="ParkingCRUDServlet" method="get" style="display:inline;">
                         <input type="hidden" name="editar" value="editar">
                         <input type="hidden" name="indice" value="<%=i%>">
                         <button type="submit" name="submit" value="editar"><img src="imgs/edit.png" alt="edit" width="20px"></button>
                     </form>
-                    <form action="ParkingSpotCRUDServlet" method="get" style="display:inline;">
+                    <form action="ParkingCRUDServlet" method="get" style="display:inline;">
                         <input type="hidden" name="borrar" value="borrar">
                         <input type="hidden" name="indice" value="<%=i%>">
                         <button type="submit" name="submit" value="borrar"><img src="imgs/cancel.png" alt="delete" width="20px"></button>

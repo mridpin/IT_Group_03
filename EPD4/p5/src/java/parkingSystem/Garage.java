@@ -7,13 +7,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Garage {
-    
+
     private static PersistenciaJDBC dao = new PersistenciaJDBC();
 
-
     // Devuelve todos los coches en el aparcamiento
-    public static List<ParkingSpot> currentSpots() {
-        List<ParkingSpot> list = null;
+    public static List<Parking> currentSpots() {
+        List<Parking> list = null;
         try {
             list = dao.currentSpots();
         } catch (SQLException e) {
@@ -23,9 +22,9 @@ public class Garage {
     }
 
     // Devuelve los coches que se han excedido iterando y filtrando todos los coches del aparcamiento
-    public static List<ParkingSpot> getCochesExcedidos(List<ParkingSpot> parking) {
-        List<ParkingSpot> list = new ArrayList<>();
-        for (ParkingSpot park : parking) {
+    public static List<Parking> getCochesExcedidos(List<Parking> parking) {
+        List<Parking> list = new ArrayList<>();
+        for (Parking park : parking) {
             if (isExcedido(park)) {
                 list.add(park);
             }
@@ -34,9 +33,9 @@ public class Garage {
     }
 
     // Devuelve los coches que NO se han excedido iterando y filtrando todos los vehiculos
-    public static List<ParkingSpot> getCochesNoExcedidos(List<ParkingSpot> parking) {
-        List<ParkingSpot> list = new ArrayList<>();
-        for (ParkingSpot park : parking) {
+    public static List<Parking> getCochesNoExcedidos(List<Parking> parking) {
+        List<Parking> list = new ArrayList<>();
+        for (Parking park : parking) {
             if (!isExcedido(park)) {
                 list.add(park);
             }
@@ -45,22 +44,19 @@ public class Garage {
     }
 
     // Calcula si los coches se han excedido
-    private static boolean isExcedido(ParkingSpot parking) {
+    private static boolean isExcedido(Parking parking) {
         boolean res = false;
-        if (!"--".equals(parking.getHoraSalida())) {
+        if (!"--".equals(parking.getSalida()) && parking.getSalida().matches("\\d+")) {
             // horasalida - horaentrada > tiempo permitido ==> excedido
-            String[] horaSalida = parking.getHoraSalida().split(":");
-            int salida = Integer.parseInt(horaSalida[1]) + Integer.parseInt(horaSalida[0]) * 60;
-            int horaEntrada = parking.getHoraEntrada();
-            int entrada = horaEntrada / 60 + (horaEntrada % 60);
-            res = salida - entrada > parking.getTiempoPermitido();
+            res = Integer.parseInt(parking.getSalida()) < parking.getEntrada()
+                    || Integer.parseInt(parking.getSalida()) - parking.getEntrada() > parking.getTiempoPermitido();
         }
         return res;
     }
 
-    public static List<ParkingSpot> buscar(String busqueda, List<ParkingSpot> parking) {
-        List<ParkingSpot> list = new ArrayList<>();
-        for (ParkingSpot park : parking) {
+    public static List<Parking> buscar(String busqueda, List<Parking> parking) {
+        List<Parking> list = new ArrayList<>();
+        for (Parking park : parking) {
             if (park.getMatricula().startsWith(busqueda)) {
                 list.add(park);
             }
@@ -68,17 +64,17 @@ public class Garage {
         return list;
     }
 
-    public static List<ParkingSpot> enAparcamiento(List<ParkingSpot> parking) {
-        List<ParkingSpot> list = new ArrayList<>();
-        for (ParkingSpot park : parking) {
-            if ("--".equals(park.getHoraSalida())) {
+    public static List<Parking> enAparcamiento(List<Parking> parking) {
+        List<Parking> list = new ArrayList<>();
+        for (Parking park : parking) {
+            if ("--".equals(park.getSalida())) {
                 list.add(park);
             }
         }
         return list;
     }
 
-    public static void updateParking(ParkingSpot parking) {
+    public static void updateParking(Parking parking) {
         try {
             dao.updateParking(parking);
         } catch (SQLException ex) {
@@ -86,7 +82,7 @@ public class Garage {
         }
     }
 
-    public static void deleteParking(ParkingSpot parking) {
+    public static void deleteParking(Parking parking) {
         try {
             dao.deleteParking(parking);
         } catch (SQLException ex) {
@@ -94,7 +90,7 @@ public class Garage {
         }
     }
 
-    public static void createParking(ParkingSpot parking) {
+    public static void createParking(Parking parking) {
         try {
             dao.createParking(parking);
         } catch (SQLException ex) {

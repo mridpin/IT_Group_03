@@ -5,16 +5,16 @@
         <servlet-class>servlets.ServletP4</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ParkingSpotCRUDServlet</servlet-name>
-        <servlet-class>servlets.ParkingSpotCRUDServlet</servlet-class>
+        <servlet-name>ParkingCRUDServlet</servlet-name>
+        <servlet-class>servlets.ParkingCRUDServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletP4</servlet-name>
         <url-pattern>/ServletP4</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ParkingSpotCRUDServlet</servlet-name>
-        <url-pattern>/ParkingSpotCRUDServlet</url-pattern>
+        <servlet-name>ParkingCRUDServlet</servlet-name>
+        <url-pattern>/ParkingCRUDServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -22,6 +22,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

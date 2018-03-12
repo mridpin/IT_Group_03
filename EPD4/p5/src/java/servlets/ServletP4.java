@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import parkingSystem.Garage;
-import parkingSystem.ParkingSpot;
+import parkingSystem.Parking;
 
 /**
  *
@@ -40,9 +40,9 @@ public class ServletP4 extends HttpServlet {
         HttpSession session = request.getSession(false);
         String url = "/index.jsp";
 
-        List<ParkingSpot> parkingSpots = Garage.currentSpots();
-        List<ParkingSpot> resultados = new ArrayList();
-        List<ParkingSpot> filteredParking = new ArrayList<>();
+        List<Parking> parkingSpots = Garage.currentSpots();
+        List<Parking> resultados = new ArrayList();
+        List<Parking> filteredParking = new ArrayList<>();
 
         if (request.getParameter("Accion1") != null) {
             url = "/index.jsp";
