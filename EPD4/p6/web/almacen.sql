@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-03-2018 a las 22:52:23
+-- Tiempo de generación: 12-03-2018 a las 22:42:54
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -49,19 +49,19 @@ INSERT INTO `editorial` (`id`, `nombre`) VALUES
 
 CREATE TABLE `libro` (
   `id` int(11) NOT NULL,
-  `autor` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `titulo` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `autor` varchar(256) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `titulo` varchar(256) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `precio` float NOT NULL,
   `isbn` int(11) NOT NULL,
   `editorialid` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `libro`
 --
 
 INSERT INTO `libro` (`id`, `autor`, `titulo`, `precio`, `isbn`, `editorialid`) VALUES
-(1, 'Arturo Pérez Reverte', 'El Capitán Alatriste', 10, 101, 1),
+(1, 'Arturo Pérez Reverte', 'El Capitán Alastriste', 10, 101, 1),
 (2, 'Neil Gaiman', 'Humos y Espejos', 12, 102, 1),
 (3, 'Lewis Carrol', 'Alicia en el País de las Maravillas', 15, 103, 2),
 (4, 'Philip K. Dick', 'Cuentos Completos I', 14.5, 104, 2),
@@ -84,7 +84,9 @@ ALTER TABLE `editorial`
 -- Indices de la tabla `libro`
 --
 ALTER TABLE `libro`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `Editorial` (`editorialid`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -95,6 +97,21 @@ ALTER TABLE `libro`
 --
 ALTER TABLE `editorial`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `libro`
+--
+ALTER TABLE `libro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `libro`
+--
+ALTER TABLE `libro`
+  ADD CONSTRAINT `Editorial` FOREIGN KEY (`editorialid`) REFERENCES `editorial` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

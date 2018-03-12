@@ -40,7 +40,7 @@
             <tr>
                 <td><b><%= libro.getTitulo()%></b></td>
                 <td><b><%= libro.getAutor()%></b></td>
-                <td><b><%= new Almacen().getEditorial(libro.getEditorialid()).getNombre()%></b></td>
+                <td><b><%= libro.getEditorial().getNombre()%></b></td>
                 <td><b><%= libro.getPrecio()%></b></td>
                 <td><b><%= libro.getCantidad()%></b></td>
                 <td><b><%= subtotal%></b></td>
