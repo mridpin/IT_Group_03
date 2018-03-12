@@ -42,19 +42,6 @@ public class Almacen {
 //pasamos a
         return listaLibros;
     }
-    
-    //Returns the publisher with the specified id
-    public Editorial getEditorial(int id)
-    {
-        Editorial result=null;
-        session = HibernateUtil.getSessionFactory().getCurrentSession();
-        org.hibernate.Transaction tx = session.beginTransaction();
-        Query q = session.createQuery("from Editorial where id = '" + id + "'");
-        result = (Editorial) q.uniqueResult();
-        tx.commit();
-        
-        return result;
-    }
 
     public Libro consultaLibro(int isbn) throws SQLException {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
