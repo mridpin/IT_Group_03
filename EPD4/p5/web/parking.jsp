@@ -4,7 +4,7 @@
     Author     : ridao
 --%>
 
-<%@page import="parkingSystem.ParkingSpot"%>
+<%@page import="parkingSystem.Parking"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,28 +28,34 @@
                         <%
                             // Comprbamos si estamos editando o creando un parking mediante el formulario
                             if (request.getParameter("editar") != null) {
+                                Parking parking = ((Parking) session.getAttribute("Parking"));
+                                int entrada = parking.getEntrada();
+                                // Turn 60/h+min integer into hh:mm with 2 digit padding
+                                String horaEntrada = String.format("%02d", (entrada / 60)) + ":" + String.format("%02d", (entrada % 60));
+                                int salida = (parking.getSalida().matches("\\d+")) ? Integer.parseInt(parking.getSalida()) : -1;
+                                String horaSalida = (salida != -1) ? String.format("%02d", (salida / 60)) + ":" + String.format("%02d", (salida % 60)) : "--";
                         %>                         
                         <td>
-                            <form method="get" action="ParkingSpotCRUDServlet" id="form"></form>
-                            <input type="text" name="matricula" form="form" readonly="readonly" value="<%=((ParkingSpot) session.getAttribute("parkingSpot")).getMatricula()%>">
+                            <form method="get" action="ParkingCRUDServlet" id="form"></form>
+                            <input type="text" name="matricula" form="form" readonly="readonly" value="<%=parking.getMatricula()%>">
                         </td>
                         <td>
-                            <input type="text" name="modelo" form="form" value="<%=((ParkingSpot) session.getAttribute("parkingSpot")).getModelo()%>">
+                            <input type="text" name="modelo" form="form" value="<%=parking.getModelo()%>">
                         </td>
                         <td>
-                            <input type="text" name="entrada" form="form" value="<%=((ParkingSpot) session.getAttribute("parkingSpot")).getHoraEntrada()%>">
+                            <input type="text" name="entrada" form="form" value="<%=horaEntrada%>">
                         </td>
                         <td>
-                            <input type="text" name="salida" form="form" value="<%=((ParkingSpot) session.getAttribute("parkingSpot")).getHoraSalida()%>">
+                            <input type="text" name="salida" form="form" value="<%=horaSalida%>">
                         </td>
                         <td>
-                            <input type="number" name="tiempo" form="form" value="<%=((ParkingSpot) session.getAttribute("parkingSpot")).getTiempoPermitido()%>">
+                            <input type="number" name="tiempo" form="form" value="<%=parking.getTiempoPermitido()%>">
                         </td>
                         <%
                         } else if (request.getParameter("crear") != null) {
                         %>
                         <td>
-                            <form method = "get" action = "ParkingSpotCRUDServlet" id = "form" ></form> 
+                            <form method = "get" action = "ParkingCRUDServlet" id = "form" ></form> 
                             <input type="text" name="matricula" form="form" value="1234EXA">
                         </td>
                         <td>

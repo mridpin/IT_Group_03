@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public class Garage {
 
     // Devuelve todos los coches en el aparcamiento
-    public static List<ParkingSpot> currentSpots() throws SQLException {
+    public static List<ParkingSpot> currentSpots() {
         List<ParkingSpot> list = null;
         try {
             list = PersistenciaJDBC.currentSpots();
@@ -77,7 +77,39 @@ public class Garage {
 
     public static void updateParking(ParkingSpot parking) {
         try {
-            PersistenciaJDBC.updateParking(parking.getMatricula(), parking.getModelo(), parking.getHoraEntrada(), parking.getHoraSalida(), parking.getTiempoPermitido());
+            int entrada = Integer.parseInt(parking.getHoraEntrada().split(":")[1]) + Integer.parseInt(parking.getHoraEntrada().split(":")[0]) * 60;
+            String salida = "";
+            if (!parking.getHoraSalida().equals("--")) {
+                Integer salidaMinutos = (Integer.parseInt(parking.getHoraSalida().split(":")[0]) * 60) + Integer.parseInt(parking.getHoraSalida().split(":")[1]);
+                salida = salidaMinutos.toString();
+            } else {
+                salida = "--";
+            }
+            PersistenciaJDBC.updateParking(parking.getMatricula(), parking.getModelo(), entrada, salida, parking.getTiempoPermitido());
+        } catch (SQLException ex) {
+            Logger.getLogger(Garage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void deleteParking(ParkingSpot parking) {
+        try {
+            PersistenciaJDBC.deleteParking(parking.getMatricula());
+        } catch (SQLException ex) {
+            Logger.getLogger(Garage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void createParking(ParkingSpot parking) {
+        int entrada = Integer.parseInt(parking.getHoraEntrada().split(":")[1]) + Integer.parseInt(parking.getHoraEntrada().split(":")[0]) * 60;
+        String salida = "";
+        if (!parking.getHoraSalida().equals("--")) {
+            Integer salidaMinutos = (Integer.parseInt(parking.getHoraSalida().split(":")[0]) * 60) + Integer.parseInt(parking.getHoraSalida().split(":")[1]);
+            salida = salidaMinutos.toString();
+        } else {
+            salida = "--";
+        }
+        try {
+            PersistenciaJDBC.createParking(parking.getMatricula(), parking.getModelo(), entrada, salida, parking.getTiempoPermitido());
         } catch (SQLException ex) {
             Logger.getLogger(Garage.class.getName()).log(Level.SEVERE, null, ex);
         }

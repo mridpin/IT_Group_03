@@ -6,9 +6,9 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,13 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import parkingSystem.Garage;
-import parkingSystem.ParkingSpot;
+import parkingSystem.Parking;
 
 /**
  *
  * @author ridao
  */
-public class ParkingSpotCRUDServlet extends HttpServlet {
+public class ServletP4 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,33 +37,33 @@ public class ParkingSpotCRUDServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         HttpSession session = request.getSession(false);
-        String url = "/parking.jsp";
+        String url = "/index.jsp";
 
-        if (request.getParameter("editar") != null) {
-            ParkingSpot parking = null;
-            // Mostramos el parking que se va a editar usando el indice del formulario para cogerlo de la lista que devuelve el modelo
-            parking = Garage.currentSpots().get(Integer.parseInt(request.getParameter("indice")));
-            // Pasamos los datos a traves de variable de sesion
-            session.setAttribute("parkingSpot", parking);
-        } else if (request.getParameter("guardar") != null) {
-            ParkingSpot parking = new ParkingSpot(request.getParameter("matricula"), request.getParameter("modelo"), request.getParameter("entrada"), request.getParameter("salida"), Integer.parseInt(request.getParameter("tiempo")));
-            Garage.updateParking(parking);
+        List<Parking> parkingSpots = Garage.currentSpots();
+        List<Parking> resultados = new ArrayList();
+        List<Parking> filteredParking = new ArrayList<>();
+
+        if (request.getParameter("Accion1") != null) {
             url = "/index.jsp";
-        } else if (request.getParameter("borrar") != null) {
-            int i = Integer.parseInt(request.getParameter("indice"));
-            // El controlador pide al modelo todos los parking y se queda con el que indica el indice pasado por formulario
-            ParkingSpot parking = Garage.currentSpots().get(i);
-            Garage.deleteParking(parking);
-            url = "/index.jsp";
-        } else if (request.getParameter("crear") != null) {
-            // Redireccionamos a parking.jsp manteniendo el parameter crear para distinguir alli los formularios de crear y editar
-        } else if (request.getParameter("anyadir") != null) {
-            // Tomamos los datos del formulario y los añadimos a la db
-            ParkingSpot parking = new ParkingSpot(request.getParameter("matricula"), request.getParameter("modelo"), request.getParameter("entrada"), request.getParameter("salida"), Integer.parseInt(request.getParameter("tiempo")));
-            Garage.createParking(parking);
-            url = "/index.jsp";
+            if (request.getParameter("submit_busqueda_matricula") != null) {
+                resultados = Garage.buscar(request.getParameter("busqueda"), parkingSpots);
+            } else if (request.getParameter("submit_busqueda_todavia_aparcamiento") != null) {
+                resultados = Garage.enAparcamiento(parkingSpots);
+            }
+            session.setAttribute("lista", resultados);
+        } else if (request.getParameter("Accion2") != null) {
+            url = "/agrupaciones.jsp";
+            if (request.getParameter("excedidos") != null) {
+
+                filteredParking = Garage.getCochesExcedidos(parkingSpots);
+                session.setAttribute("excedidos", filteredParking);
+            } else if (request.getParameter("no_excedidos") != null) {
+
+                filteredParking = Garage.getCochesNoExcedidos(parkingSpots);
+                session.setAttribute("no_excedidos", filteredParking);
+            }
+            session.setAttribute("lista", filteredParking);
         }
 
         session.setAttribute("action", "controlador");
