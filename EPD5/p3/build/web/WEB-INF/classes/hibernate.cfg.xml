@@ -50,6 +50,6 @@ Contributor(s):
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-    <mapping resource="parkingSystem/Parking.hbm.xml"/>
+    <mapping resource="model/Parking.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

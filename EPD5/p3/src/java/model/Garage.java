@@ -47,10 +47,10 @@ public class Garage {
     // Calcula si los coches se han excedido
     private static boolean isExcedido(Parking parking) {
         boolean res = false;
-        if (!"--".equals(parking.getSalida()) && parking.getSalida().matches("\\d+")) {
+        if (parking.getSalida() != -1) {
             // horasalida - horaentrada > tiempo permitido ==> excedido
-            res = Integer.parseInt(parking.getSalida()) < parking.getEntrada()
-                    || Integer.parseInt(parking.getSalida()) - parking.getEntrada() > parking.getTiempoPermitido();
+            res = parking.getSalida() < parking.getEntrada()
+                    || parking.getSalida() - parking.getEntrada() > parking.getTiempoPermitido();
         }
         return res;
     }
@@ -68,7 +68,7 @@ public class Garage {
     public static List<Parking> enAparcamiento(List<Parking> parking) {
         List<Parking> list = new ArrayList<>();
         for (Parking park : parking) {
-            if ("--".equals(park.getSalida())) {
+            if (park.getSalida() == -1) {
                 list.add(park);
             }
         }

@@ -12,13 +12,13 @@ public class Parking implements java.io.Serializable {
      *  donde se guardan como un string tal que hh:mm
      */
     private int entrada;
-    private String salida;
+    private int salida;
     private int tiempoPermitido;
 
     public Parking() {
     }
 
-    public Parking(String matricula, String modelo, int entrada, String salida, int tiempoPermitido) {
+    public Parking(String matricula, String modelo, int entrada, int salida, int tiempoPermitido) {
         this.matricula = matricula;
         this.modelo = modelo;
         this.entrada = entrada;
@@ -50,11 +50,11 @@ public class Parking implements java.io.Serializable {
         this.entrada = entrada;
     }
 
-    public String getSalida() {
+    public int getSalida() {
         return this.salida;
     }
 
-    public void setSalida(String salida) {
+    public void setSalida(int salida) {
         this.salida = salida;
     }
 

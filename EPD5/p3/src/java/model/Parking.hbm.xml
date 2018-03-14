@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Mar 11, 2018 6:38:34 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="garage" name="parkingSystem.Parking" optimistic-lock="version" table="parking">
+  <class catalog="garage" name="model.Parking" optimistic-lock="version" table="parking">
     <id name="matricula" type="string">
       <column length="8" name="matricula"/>
       <generator class="assigned"/>
@@ -13,8 +13,8 @@
     <property name="entrada" type="int">
       <column name="entrada" not-null="true"/>
     </property>
-    <property name="salida" type="string">
-      <column length="16" name="salida" not-null="true"/>
+    <property name="salida" type="int">
+      <column name="salida" not-null="true"/>
     </property>
     <property name="tiempoPermitido" type="int">
       <column name="tiempo_permitido" not-null="true"/>
