@@ -1,0 +1,63 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="default" extends="struts-default">
+        
+        <!--
+        Default action that will be called the first time the program is loaded
+        (will go to the action named first)
+        -->
+        <action name="">
+            <result type="chain">
+                <param name="actionName">first</param>
+               
+            </result>
+        </action>     
+        
+    </package>
+    
+    <package name="tienda" extends="struts-default">
+        
+        <!--
+        Will load all of the books in the store into the attribute in AlmacenAction called libros
+        -->
+        <action name="first" class="libreria.actions.AlmacenAction">
+            <result>index.jsp</result>
+        </action>
+        
+        <!--
+        Will handle the add of a new book, it will call the method getLibrosSeleccionados and 
+        depending on the output, it give a different output
+        -->
+        <action name="newBook" class="libreria.actions.AlmacenAction" method="getLibrosSeleccionados">
+            
+            <!--
+            If it's successful, it will load the action first
+            -->
+            <result name="success" type="chain">
+                
+                <param name="actionName">first</param>
+                
+            </result>
+            <result name="error">error.jsp</result>
+            
+        </action>
+        
+        <!--
+        
+        When it's done, it will proccess the purchase by calling processPurchase
+        
+        -->
+        <action name="buy" class="libreria.actions.AlmacenAction" method="processPurchase">
+            
+            <result name="success">finish.jsp</result>
+            <result name="error">error.jsp</result>
+            
+        </action>
+        
+    </package>
+
+    
+</struts>
