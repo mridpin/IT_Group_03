@@ -49,8 +49,7 @@
                     https://stackoverflow.com/questions/13020727/how-to-submit-specific-iterator-entry-to-action-in-struts-2 
                     -->
                     <td>
-                        <s:form action="editParking" theme="simple">
-                            <s:hidden name="edit" value="edit" />
+                        <s:form action="forwardToParkingEdit" theme="simple">
                             <s:hidden name="index" value="%{#parking.matricula}" />
                             <s:submit type="image" src="index/imgs/edit.png" width="40px" value="submit"></s:submit>
                         </s:form>

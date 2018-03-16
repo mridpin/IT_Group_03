@@ -9,7 +9,12 @@
         <!--Default page-->
         <action name="index" class="actions.LoadAllParkingsActionSupport"> 
             <result name="success">index/index.jsp</result>
+        </action>        
+    </package>
+    <package name="edit" namespace="/" extends="struts-default">
+        <action name="forwardToParkingEdit" class="actions.EditParkingActionSupport"> 
+            <result name="success">parking/parking.jsp</result>
+            <result name="error">index/index.jsp</result>
         </action>
-
     </package>
 </struts>
