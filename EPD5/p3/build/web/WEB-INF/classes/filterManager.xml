@@ -1,0 +1,17 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- Author: ridao -->
+ 
+<struts>
+    <!-- Paquete para la gestion de los filtros -->
+    <package name="filter" namespace="/filter" extends="struts-default">
+        <action name="showOverdue" class="actions.LoadAllParkingsActionSupport" method="showOverdue"> 
+            <result name="success">/index/index.jsp</result>
+        </action>        
+        <action name="showNotOverdue" class="actions.LoadAllParkingsActionSupport" method="showNotOverdue"> 
+            <result name="success">/index/index.jsp</result>
+        </action>        
+    </package>
+</struts>
