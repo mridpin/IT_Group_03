@@ -16,5 +16,9 @@
             <result name="success">parking/parking.jsp</result>
             <result name="error">index/index.jsp</result>
         </action>
+        <action name="editParking" class="actions.EditParkingActionSupport" method="editParking"> 
+            <result name="success">index/index.jsp</result>
+            <result name="error">index/index.jsp</result>
+        </action>
     </package>
 </struts>

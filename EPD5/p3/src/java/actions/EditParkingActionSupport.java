@@ -20,6 +20,7 @@ public class EditParkingActionSupport extends ActionSupport {
     String index;
     Parking parking;
     String isEdit; //Variable que se emplea en parkings.jsp pasa saber si estamos editando o creando
+    //variables del formulario
     
     public EditParkingActionSupport() {
     }
@@ -58,6 +59,12 @@ public class EditParkingActionSupport extends ActionSupport {
             }
         }
         return ERROR;
+    }
+    
+    public String method () throws Exception  {
+        parking.setModelo(NONE);
+        Garage.updateParking(parking);
+        
     }
     
 }
