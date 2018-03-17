@@ -17,7 +17,7 @@
                 <th>Hora de salida</th>
                 <th>Tiempo permitido</th>                
                 <th>
-                    <s:form action="createParking" theme="simple">
+                    <s:form namespace="/parking" action="forwardToParkingCreate" theme="simple">
                         <s:hidden name="create" value="create" />
                         <s:submit type="image" src="index/imgs/add.png" width="40px" value="submit"></s:submit>
                     </s:form>
@@ -49,13 +49,13 @@
                     https://stackoverflow.com/questions/13020727/how-to-submit-specific-iterator-entry-to-action-in-struts-2 
                     -->
                     <td>
-                        <s:form action="forwardToParkingEdit" theme="simple">
+                        <s:form namespace="/parking" action="forwardToParkingEdit" theme="simple">
                             <s:hidden name="index" value="%{#parking.matricula}" />
                             <s:submit type="image" src="index/imgs/edit.png" width="40px" value="submit"></s:submit>
                         </s:form>
                     </td>
                     <td>
-                        <s:form action="deleteParking" theme="simple">
+                        <s:form namespace="/parking" action="deleteParking" theme="simple">
                             <s:hidden name="delete" value="delete" />
                             <s:hidden name="index" value="%{#parking.matricula}" />
                             <s:submit type="image" src="index/imgs/cancel.png" width="40px" value="submit"></s:submit>
@@ -64,6 +64,16 @@
                 </tr>
             </s:iterator>
         </table>
+        <br />
+        <s:form namespace="/filter" action="showOverdue" theme="simple">
+            <s:submit value="Mostrar Excedidos"></s:submit>
+        </s:form>
+        <s:form namespace="/filter" action="showNotOverdue" theme="simple">
+            <s:submit value="Mostrar No Excedidos"></s:submit>
+        </s:form>
+        <s:form namespace="/" action="" theme="simple">
+            <s:submit value="Mostrar Todos"></s:submit>
+        </s:form>
         <!--
        <td>
            <form action="ParkingCRUDServlet" method="get" style="display:inline;">

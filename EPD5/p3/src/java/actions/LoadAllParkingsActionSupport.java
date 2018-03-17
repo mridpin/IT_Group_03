@@ -35,4 +35,12 @@ public class LoadAllParkingsActionSupport extends ActionSupport {
         return SUCCESS;
     }
     
+    public String showOverdue() throws Exception {
+        setParkings(Garage.getCochesExcedidos(Garage.currentSpots()));
+        return SUCCESS;
+    }    
+    public String showNotOverdue() throws Exception {
+        setParkings(Garage.getCochesNoExcedidos(Garage.currentSpots()));
+        return SUCCESS;
+    }    
 }

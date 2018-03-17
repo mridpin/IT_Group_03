@@ -21,40 +21,71 @@
                 <s:set name="isEdit" value="isEdit"/>
                 <s:if test="%{#isEdit=='isEdit'}">
                     <h3>Editar Aparcamientos</h3>
+
+                    <s:form namespace="/parking" action="editParking" theme="simple">
+                        <table border="1">        
+                            <tr>                
+                                <th>Matr&iacute;cula</th>
+                                <th>Modelo</th>
+                                <th>Hora de entrada</th>
+                                <th>Hora de salida</th>
+                                <th>Tiempo permitido</th>                
+                            </tr>                       
+                            <tr>                         
+                                <td>
+                                    <s:textfield name="matricula" disabled="disabled" value="%{parking.matricula}"></s:textfield>                                
+                                    </td>
+                                    <td>
+                                    <s:textfield name="modelo" value="%{parking.modelo}"></s:textfield>                                
+                                    </td>
+                                    <td>
+                                    <s:textfield name="entrada" value="%{parking.entrada}"></s:textfield>                                
+                                    </td>
+                                    <td>
+                                    <s:textfield name="salida" value="%{parking.salida}"></s:textfield>                                
+                                    </td>
+                                    <td>
+                                    <s:textfield name="tiempoPermitido" value="%{parking.tiempoPermitido}"></s:textfield>                                
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                        <s:submit value="Guardar"></s:submit>
+                    </s:form>
                 </s:if>
                 <s:else>
                     <h3>Crear Aparcamientos</h3>
+                    <s:form namespace="/parking" action="createParking" theme="simple">
+                        <table border="1">        
+                            <tr>                
+                                <th>Matr&iacute;cula</th>
+                                <th>Modelo</th>
+                                <th>Hora de entrada</th>
+                                <th>Hora de salida</th>
+                                <th>Tiempo permitido</th>                
+                            </tr>                       
+                            <tr>                         
+                                <td>
+                                    <s:textfield name="matricula" value="%{parking.matricula}"></s:textfield>                                
+                                    </td>
+                                    <td>
+                                    <s:textfield name="modelo" value="%{parking.modelo}"></s:textfield>                                
+                                    </td>
+                                    <td>
+                                    <s:textfield name="entrada" value="%{parking.entrada}"></s:textfield>                                
+                                    </td>
+                                    <td>
+                                    <s:textfield name="salida" value="%{parking.salida}"></s:textfield>                                
+                                    </td>
+                                    <td>
+                                    <s:textfield name="tiempoPermitido" value="%{parking.tiempoPermitido}"></s:textfield>                                
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                        <s:submit value="Guardar"></s:submit>
+                    </s:form>
                 </s:else>
-                <s:form action="editParking" theme="simple">
-                    <table border="1">        
-                        <tr>                
-                            <th>Matr&iacute;cula</th>
-                            <th>Modelo</th>
-                            <th>Hora de entrada</th>
-                            <th>Hora de salida</th>
-                            <th>Tiempo permitido</th>                
-                        </tr>                       
-                        <tr>                         
-                            <td>
-                                <s:textfield name="matricula" disabled="disabled" value="%{parking.matricula}"></s:textfield>                                
-                                </td>
-                                <td>
-                                <s:textfield name="modelo" disabled="disabled" value="%{parking.modelo}"></s:textfield>                                
-                                </td>
-                                <td>
-                                <s:textfield name="entrada" disabled="disabled" value="%{parking.entrada}"></s:textfield>                                
-                                </td>
-                                <td>
-                                <s:textfield name="salida" disabled="disabled" value="%{parking.salida}"></s:textfield>                                
-                                </td>
-                                <td>
-                                <s:textfield name="tiempoPermitido" disabled="disabled" value="%{parking.tiempoPermitido}"></s:textfield>                                
-                                </td>
-                            </tr>
-                        </table>
-                        <br>
-                    <s:submit value="Guardar"></s:submit>
-                </s:form>
                 <p><strong>Nota:</strong> Para guardar un veh&iacute;culo que no ha salido, introducir <em>-1</em> en <em>salida</em><p>
             </section>
         </article>
