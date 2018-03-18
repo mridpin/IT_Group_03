@@ -6,9 +6,11 @@
 package actions;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
 import java.util.List;
 import model.Garage;
 import model.Parking;
+import model.ParkingFormatted;
 
 /**
  *
@@ -18,6 +20,7 @@ public class EditParkingActionSupport extends ActionSupport {
 
     String index;
     Parking parking;
+    ParkingFormatted parkingFormatted;
     String isEdit; //Variable que se emplea en parkings.jsp pasa saber si estamos editando o creando
     String matricula;
     String modelo;
@@ -32,7 +35,7 @@ public class EditParkingActionSupport extends ActionSupport {
         List<Parking> parkings = Garage.currentSpots();
         for (Parking p : parkings) {
             if (p.getMatricula().equals(index)) {
-                this.setParking(p);
+                this.setParkingFormatted(this.formatParking(p));
                 this.setIsEdit("isEdit");
                 return SUCCESS;
             }
@@ -44,11 +47,17 @@ public class EditParkingActionSupport extends ActionSupport {
         parking = new Parking();
         parking.setMatricula(matricula);
         parking.setModelo(modelo);
-        if (entrada.matches("\\d+")) {
-            parking.setEntrada(Integer.parseInt(entrada));
+        if (entrada.matches("\\d\\d:\\d\\d")) {
+            int hours = Integer.parseInt(entrada.split(":")[0]);
+            int mins = Integer.parseInt(entrada.split(":")[1]);
+            parking.setEntrada(hours * 60 + mins);
         }
-        if (salida.matches("-?\\d+")) {
+        if (salida.matches("-?\\d")) {
             parking.setSalida(Integer.parseInt(salida));
+        } else if (salida.matches("\\d\\d:\\d\\d")) {
+            int hours = Integer.parseInt(salida.split(":")[0]);
+            int mins = Integer.parseInt(salida.split(":")[1]);
+            parking.setSalida(hours * 60 + mins);
         }
         if (tiempoPermitido.matches("\\d+")) {
             parking.setTiempoPermitido(Integer.parseInt(tiempoPermitido));
@@ -120,4 +129,27 @@ public class EditParkingActionSupport extends ActionSupport {
     public void setTiempoPermitido(String tiempoPermitido) {
         this.tiempoPermitido = tiempoPermitido;
     }
+
+    public ParkingFormatted getParkingFormatted() {
+        return parkingFormatted;
+    }
+
+    public void setParkingFormatted(ParkingFormatted parkingFormatted) {
+        this.parkingFormatted = parkingFormatted;
+    }
+
+    public ParkingFormatted formatParking(Parking parking) {
+
+        String entrada = String.format("%02d", parking.getEntrada() / 60) + ":" + String.format("%02d", parking.getEntrada() % 60);
+        String salida;
+        if (parking.getSalida() != -1) {
+            salida = String.format("%02d", parking.getSalida() / 60) + ":" + String.format("%02d", parking.getSalida() % 60);
+        } else {
+            salida = "--";
+        }
+        ParkingFormatted park = new ParkingFormatted(parking.getMatricula(), parking.getModelo(), entrada, salida, parking.getTiempoPermitido());
+
+        return park;
+    }
+
 }

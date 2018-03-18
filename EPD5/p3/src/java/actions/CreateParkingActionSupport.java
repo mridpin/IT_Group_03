@@ -9,6 +9,7 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import model.Garage;
 import model.Parking;
+import model.ParkingFormatted;
 
 /**
  *
@@ -36,11 +37,17 @@ public class CreateParkingActionSupport extends ActionSupport {
         parking = new Parking();
         parking.setMatricula(matricula);
         parking.setModelo(modelo);
-        if (entrada.matches("\\d+")) {
-            parking.setEntrada(Integer.parseInt(entrada));
+        if (entrada.matches("\\d\\d:\\d\\d")) {
+            int hours = Integer.parseInt(entrada.split(":")[0]);
+            int mins = Integer.parseInt(entrada.split(":")[1]);
+            parking.setEntrada(hours*60 + mins);
         }
-        if (salida.matches("-?\\d+")) {
+        if (salida.matches("-?\\d")) {
             parking.setSalida(Integer.parseInt(salida));
+        } else if (salida.matches("\\d\\d:\\d\\d")) {
+            int hours = Integer.parseInt(salida.split(":")[0]);
+            int mins = Integer.parseInt(salida.split(":")[1]);
+            parking.setSalida(hours*60 + mins);
         }
         if (tiempoPermitido.matches("\\d+")) {
             parking.setTiempoPermitido(Integer.parseInt(tiempoPermitido));

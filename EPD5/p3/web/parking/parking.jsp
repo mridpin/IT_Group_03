@@ -33,19 +33,19 @@
                             </tr>                       
                             <tr>                         
                                 <td>
-                                    <s:textfield name="matricula" disabled="disabled" value="%{parking.matricula}"></s:textfield>                                
+                                    <s:textfield name="matricula" disabled="disabled" value="%{parkingFormatted.matricula}"></s:textfield>                                
                                     </td>
                                     <td>
-                                    <s:textfield name="modelo" value="%{parking.modelo}"></s:textfield>                                
+                                    <s:textfield name="modelo" value="%{parkingFormatted.modelo}"></s:textfield>                                
                                     </td>
                                     <td>
-                                    <s:textfield name="entrada" value="%{parking.entrada}"></s:textfield>                                
+                                    <s:textfield name="entrada" value="%{parkingFormatted.entrada}"></s:textfield>                                
                                     </td>
                                     <td>
-                                    <s:textfield name="salida" value="%{parking.salida}"></s:textfield>                                
+                                    <s:textfield name="salida" value="%{parkingFormatted.salida}"></s:textfield>                                
                                     </td>
                                     <td>
-                                    <s:textfield name="tiempoPermitido" value="%{parking.tiempoPermitido}"></s:textfield>                                
+                                    <s:textfield name="tiempoPermitido" value="%{parkingFormatted.tiempoPermitido}"></s:textfield>                                
                                     </td>
                                 </tr>
                             </table>

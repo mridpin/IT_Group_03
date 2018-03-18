@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1><strong>IT - EPD05 - P3 - Grupo03</strong></h1>
-        <article></article>
+        <article>
         <section>
             <h2>APARCAMIENTOS</h2>
             <table border="1">        
@@ -98,45 +98,5 @@
             </s:form>
         </section>
     </article>
-    <!--
-   <td>
-       <form action="ParkingCRUDServlet" method="get" style="display:inline;">
-           <input type="hidden" name="editar" value="editar">
-           <input type="hidden" name="indice" value="">
-           <button type="submit" name="submit" value="editar"><img src="imgs/edit.png" alt="edit" width="20px"></button>
-       </form>
-       <form action="ParkingCRUDServlet" method="get" style="display:inline;">
-           <input type="hidden" name="borrar" value="borrar">
-           <input type="hidden" name="indice" value="">
-           <button type="submit" name="submit" value="borrar"><img src="imgs/cancel.png" alt="delete" width="20px"></button>
-       </form>
-   </td>
-</tr>
-
-</table>
-<br />
-<form action="ServletP4" method="get">
-<input type="hidden" name="Accion2" value="agrupaciones">
-<input type="submit" name="submit" value="Ver Agrupaciones">
-</form>
-<br />
-
-<h3>B&uacute;squedas</h3>        
-<form action="ServletP4" method="get">
-<label>Buscar si la matr&iacute;cula comienza por: </label><input type="text" name="busqueda">
-<input type="hidden" name="Accion1" value="index">
-<input type="submit" name="submit_busqueda_matricula" value="Buscar">
-</form>
-<form action="ServletP4" method="get">
-<label>Buscar veh&iacute;culos todav&iacute;a en el aparcamiento: </label>
-<input type="hidden" name="Accion1" value="index">
-<input type="submit" name="submit_busqueda_todavia_aparcamiento" value="Buscar">
-</form>
-<br />
-<h3>Ver todos</h3>
-<form action="ServletP4" method="get">
-<input type="hidden" name="Accion3" value="index">
-<input type="submit" name="ver_todos" value="Ver todos">
-</form> -->
 </body>
 </html>
