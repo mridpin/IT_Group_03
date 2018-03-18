@@ -14,4 +14,12 @@
             <result name="success">/index/index.jsp</result>
         </action>        
     </package>
+    <package name="search" namespace="/search" extends="struts-default">
+        <action name="searchByPlate" class="actions.LoadAllParkingsActionSupport" method="searchByPlate"> 
+            <result name="success">/index/index.jsp</result>
+        </action>       
+        <action name="showParked" class="actions.LoadAllParkingsActionSupport" method="showParked"> 
+            <result name="success">/index/index.jsp</result>
+        </action>       
+    </package>
 </struts>
