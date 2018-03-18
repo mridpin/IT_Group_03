@@ -83,7 +83,7 @@
 
                     String matricula = (String) current.get(0);
                     //We check is the current license contains the string that was provided
-                    if (matricula.contains(license)) {
+                    if (matricula.startsWith(license)) {
                         result.add(current);
                     }
 

@@ -75,7 +75,7 @@
                         int mSalida = Integer.parseInt(auxSalida[0]) * 60 + Integer.parseInt(auxSalida[1]);
 
                         //If the car wasnt late, we remove it from the result
-                        if (mSalida > mEntrada + (int) current.get(4)) {
+                        if (mSalida < mEntrada + (int) current.get(4)) {
                             it.remove();
                         }
 
@@ -110,7 +110,7 @@
                         int mSalida = Integer.parseInt(auxSalida[0]) * 60 + Integer.parseInt(auxSalida[1]);
 
                         //If the car wasnt late, we remove it from the result
-                        if (mSalida < mEntrada + (int) current.get(4)) {
+                        if (mSalida > mEntrada + (int) current.get(4)) {
                             it.remove();
                         }
 
