@@ -137,7 +137,7 @@
             }
 
         %>
-
+        <h1>Parking Spots</h1>
         <table border="1">
 
             <tr>
@@ -178,7 +178,7 @@
 
         </table>
 
-
+            <br>
 
         <form action="groupBy.jsp" method="POST">
 
@@ -191,5 +191,12 @@
             <input type="submit" name="notlate" value="On Time Spots">
 
         </form>
+        
+        <h3>View All</h3>
+         <form action="groupBy.jsp" method="POST">
+             
+             <input type="submit" name="all" value="View All Parking Spots">
+             
+         </form>
     </body>
 </html>

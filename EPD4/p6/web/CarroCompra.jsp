@@ -1,7 +1,3 @@
-<%-- 
-    Document   : CarroCompra
-    Author     : ricardo
---%>
 
 <%--Following directive allows the JSP page to use any of the builtin object session methods such as 
 session.getCreationTime() or session.getLastAccessTime(): --%>
@@ -9,8 +5,7 @@ session.getCreationTime() or session.getLastAccessTime(): --%>
 <%@page import="java.util.*" %>
 <%@page import="libreria.*" %>
 <%
-    List<String> listaIsbns = (List<String>) session.getAttribute("tienda.carro");
-    List<Libro> listaCompra = new Almacen().consultaListaLibrosSolicitados(listaIsbns);
+    List<Libro> listaCompra = (List<Libro>) session.getAttribute("tienda.carro");
     if (listaCompra != null && (listaCompra.size() > 0)) {
 %>
 <center>

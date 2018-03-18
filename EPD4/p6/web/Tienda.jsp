@@ -1,8 +1,3 @@
-<%-- 
-    Document   : Tienda
-    Author     : ricardo
---%>
-
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
@@ -12,7 +7,18 @@
 <%
     List<Libro> listaLibros = null;
     try {
-        listaLibros = new Almacen().consultaLibrosDisponibles();
+        listaLibros = (List<Libro>)session.getAttribute("articulos");
+        
+        if(listaLibros==null)
+        {
+            //First time we enter the site or if we refresh
+            %>
+            
+            <jsp:forward page="LibreriaServlet"/>
+            
+            <%
+        }
+        
     } catch (Exception ex) {
         out.print(ex.getMessage());
     }

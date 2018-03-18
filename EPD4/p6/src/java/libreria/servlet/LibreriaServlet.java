@@ -2,8 +2,11 @@ package libreria.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -22,40 +25,54 @@ public class LibreriaServlet extends HttpServlet {
         if (session != null) {
 
             String accion = request.getParameter("Accion");
+            if (accion != null) {
+                if (accion.equals("agregar")) {
 
-            if (accion.equals("agregar")) {
-
-                List<String> listaIsbns = (List<String>) session.getAttribute("tienda.carro");
-                String isbn = request.getParameter("seleccionLibros");
-                Libro libro = null;
-                try {
-                    libro = new Almacen().consultaLibro(Integer.parseInt(isbn));
-                    if (libro != null) {
-                        if (listaIsbns == null) {
-                            listaIsbns = new ArrayList<String>(10);
+                    List<String> listaIsbns = (List<String>) session.getAttribute("isbns");
+                    String isbn = request.getParameter("seleccionLibros");
+                    Libro libro = null;
+                    try {
+                        libro = new Almacen().consultaLibro(Integer.parseInt(isbn));
+                        if (libro != null) {
+                            if (listaIsbns == null) {
+                                listaIsbns = new ArrayList<String>(10);
+                            }
+                            listaIsbns.add(isbn);
+                            session.setAttribute("isbns",listaIsbns);
+                            session.setAttribute("tienda.carro", new Almacen().consultaListaLibrosSolicitados(listaIsbns));
+                        } else {
+                            PrintWriter out = response.getWriter();
+                            out.print("ERROR: Libro con ISBN " + isbn + " no estádisponible.");
+                            out.close();
                         }
-                        listaIsbns.add(isbn);
-                        session.setAttribute("tienda.carro", listaIsbns);
-                    } else {
+                    } catch (Exception ex) {
                         PrintWriter out = response.getWriter();
-                        out.print("ERROR: Libro con ISBN " + isbn + " no estádisponible.");
+                        out.print("ERROR: " + ex.getMessage());
                         out.close();
                     }
-                } catch (Exception ex) {
-                    PrintWriter out = response.getWriter();
-                    out.print("ERROR: " + ex.getMessage());
-                    out.close();
+                    //OJO!! debe empezar con '/' para indicar que es relativo al contexto actual
+                    String url = "/Tienda.jsp";
+                    ServletContext sc = getServletContext();
+                    RequestDispatcher rd = sc.getRequestDispatcher(url);
+                    rd.forward(request, response);
+                } else if (accion.equals("comprar")) {
+                    String url = "/Compra.jsp";
+                    ServletContext sc = getServletContext();
+                    RequestDispatcher rd = sc.getRequestDispatcher(url);
+                    rd.forward(request, response);
                 }
-                //OJO!! debe empezar con '/' para indicar que es relativo al contexto actual
+            } else {
+                //If it's the first time we enter the page or if we refresh
                 String url = "/Tienda.jsp";
-                ServletContext sc = getServletContext();
-                RequestDispatcher rd = sc.getRequestDispatcher(url);
-                rd.forward(request, response);
-            } else if (accion.equals("comprar")) {
-                String url = "/Compra.jsp";
-                ServletContext sc = getServletContext();
-                RequestDispatcher rd = sc.getRequestDispatcher(url);
-                rd.forward(request, response);
+                try {
+                    session.setAttribute("articulos", new Almacen().consultaLibrosDisponibles());
+                    session.setAttribute("tienda.carro",new ArrayList<List<Libro>>());
+                    ServletContext sc = getServletContext();
+                    RequestDispatcher rd = sc.getRequestDispatcher(url);
+                    rd.forward(request, response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(LibreriaServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 

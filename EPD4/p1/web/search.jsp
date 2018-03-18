@@ -107,7 +107,7 @@
         }
 
         %>
-
+        <h1>Parking Spots</h1>
         <table border="1">
 
             <tr>
@@ -148,11 +148,12 @@
 
         </table>
 
+            <br>
 
 
         <form action="search.jsp" method="POST">
 
-            Introduce los numeros de la matricula a buscar: <input type="text" name="license" >
+            <label>Search for licenses that start with: </label><input type="text" name="license" >
             <br>
 
             <input type="submit" name="search" value="Search By License">
@@ -161,8 +162,14 @@
         <br>
         <form action="search.jsp" method="POST">
 
-            <input type="submit" name="still" value="Still in parked">
+            <label>Search vehicles that are still parked </label> <input type="submit" name="still" value="Search">
 
         </form>
+         <h3>View All</h3>
+         <form action="search.jsp" method="POST">
+             
+             <input type="submit" name="all" value="View All Parking Spots">
+             
+         </form>
     </body>
 </html>

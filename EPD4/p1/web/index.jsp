@@ -24,7 +24,7 @@
 
 
            %>
-           
+           <h1>Parking Spots</h1>
             <table border="1">
             
             <tr>
@@ -78,6 +78,8 @@
             %>
             
             </table>
+            
+            <br>
             
              <form action="groupBy.jsp" method="POST">
             
