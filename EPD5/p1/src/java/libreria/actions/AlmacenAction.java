@@ -74,7 +74,7 @@ public class AlmacenAction extends ActionSupport{
                
     }
     
-    //Calculates the list of selected books
+    //Calculates the list of selected books and calculates the final cost
     public String processPurchase()
     {
         try{
@@ -89,6 +89,16 @@ public class AlmacenAction extends ActionSupport{
             }
         //We get all the selected books from their isbn
         selected = new Almacen().consultaListaLibrosSolicitados(selectedBooks);
+        
+        //We now calculate the total amount of the purchase
+        double total=0.0;
+        
+        for(int i=0;i<selected.size();i++)
+        {
+            total+=selected.get(i).getPrecio();
+        }
+        
+        session.put("total",total);
         
         return SUCCESS;
         
