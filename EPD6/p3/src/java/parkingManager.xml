@@ -1,0 +1,52 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- Author: ridao -->
+ 
+<struts>    
+    <!-- Paquete para controlar la edicion de parkings -->
+    <package name="edit" namespace="/parking" extends="struts-default">
+        <!--Accion para redireccionar a parking.jsp presentando los datos del parking seleccionado-->
+        <action name="forwardToParkingEdit" class="actions.parking.edit.EditParkingActionSupport"> 
+            <result name="success">parking.jsp</result>
+            <result name="error">index/index.jsp</result>
+        </action>
+        <!--Accion para guardar los cambios en el parking. Al poner ${} como nombre de la acction,
+        se parsea un string vacio y se reenvia a la accion por defecto-->
+        <action name="editParking" class="actions.parking.edit.EditParkingActionSupport" method="editParking"> 
+            <result type="redirectAction">
+                <param name="actionName">${}</param>
+                <param name="namespace">/</param>
+            </result>            
+        </action>
+    </package>
+    <!--Paquete para controlar el borrado de parkings-->
+    <package name="delete" namespace="/parking" extends="struts-default">        
+        <!-- -->
+        <action name="deleteParking" class="actions.parking.delete.DeleteParkingActionSupport" method="deleteParking"> 
+            <result type="redirectAction">
+                <param name="actionName">${}</param>
+                <param name="namespace">/</param>
+            </result>            
+        </action>
+    </package>
+    <!-- Paquete para controlar la creacion de parkings -->
+    <package name="create" namespace="/parking" extends="struts-default">
+        <!--Accion para redireccionar a parking.jsp presentando los datos del parking seleccionado-->
+        <action name="forwardToParkingCreate" class="actions.parking.create.CreateParkingActionSupport"> 
+            <result name="success">parking.jsp</result>
+            <result name="error">index/index.jsp</result>
+            <result name="input">parking.jsp</result>    
+        </action>
+        <!--Accion para guardar los cambios en el parking. Al poner ${} como nombre de la acction,
+        se parsea un string vacio y se reenvia a la accion por defecto-->
+        <action name="createParking" class="actions.parking.create.CreateParkingActionSupport" method="createParking">             
+            <result type="redirectAction">
+                <param name="actionName">${}</param>
+                <param name="namespace">/</param>
+            </result>               
+            <result name="input">parking.jsp</result>                     
+        </action>
+    </package>
+</struts>

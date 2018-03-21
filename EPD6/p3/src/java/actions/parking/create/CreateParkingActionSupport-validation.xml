@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN" "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators> 
+    <field name="matricula">
+        <field-validator type="requiredstring">
+            <message key="matricula.required" />
+        </field-validator>
+         <field-validator type="regex">
+            <param name="regex">[0-9][0-9][0-9][0-9][A-Z][A-Z][A-Z]</param>
+            <message key="matricula.format" />
+        </field-validator>
+    </field> 
+    <field name="modelo">
+        <field-validator type="requiredstring">
+            <message key="modelo.required" />
+        </field-validator>
+    </field> 
+</validators>
