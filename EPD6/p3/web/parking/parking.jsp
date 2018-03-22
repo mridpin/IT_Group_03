@@ -19,55 +19,33 @@
             <section>
                 <!-- Conditions in struct
                 https://www.mkyong.com/struts2/struts-2-if-elseif-else-tag-example/-->
-                <s:set name="isEdit" value="isEdit"/>
-                <s:if test="%{#isEdit=='isEdit'}">
-                    <h3>Editar Aparcamientos</h3>
-
-                    <s:form namespace="/parking" action="editParking">
-                        <table border="1">        
-                            <tr>                
-                                <th><s:textfield key="matricula.required"></s:textfield></th>
-                                    <th>Modelo</th>
-                                    <th>Hora de entrada</th>
-                                    <th>Hora de salida</th>
-                                    <th>Tiempo permitido</th>                
-                                </tr>                       
-                                <tr>                         
-                                    <td>
-                                    <s:textfield key="matricula" disabled="disabled" value="%{parkingFormatted.matricula}"></s:textfield>                                
-                                    </td>
-                                    <td>
-                                    <s:textfield name="modelo" value="%{parkingFormatted.modelo}"></s:textfield>                                
-                                    </td>
-                                    <td>
-                                    <s:textfield name="entrada" value="%{parkingFormatted.entrada}"></s:textfield>                                
-                                    </td>
-                                    <td>
-                                    <s:textfield name="salida" value="%{parkingFormatted.salida}"></s:textfield>                                
-                                    </td>
-                                    <td>
-                                    <s:textfield name="tiempoPermitido" value="%{parkingFormatted.tiempoPermitido}"></s:textfield>                                
-                                    </td>
-                                </tr>
-                            </table>
-                            <br>
-                        <s:submit value="Guardar"></s:submit>
-                    </s:form>
-                </s:if>
-                <s:else>
-                    <h3>Crear Aparcamientos</h3>
-                    <s:i18n name="myBundle">
+                <s:i18n name="myBundle">
+                    <s:set name="isEdit" value="isEdit"/>
+                    <s:if test="%{#isEdit=='isEdit'}">                    
+                        <h3><s:text name="edit"></s:text></h3>
+                        <s:form namespace="/parking" action="editParking" validate="true">
+                            <s:textfield key="matricula.required"></s:textfield>            
+                            <s:textfield key="matricula" disabled="disabled" value="%{parkingFormatted.matricula}"></s:textfield>                                
+                            <s:textfield key="modelo" value="%{parkingFormatted.modelo}"></s:textfield>                                
+                            <s:textfield key="entrada" value="%{parkingFormatted.entrada}"></s:textfield>                                
+                            <s:textfield key="salida" value="%{parkingFormatted.salida}"></s:textfield>                                
+                            <s:textfield key="tiempoPermitido" value="%{parkingFormatted.tiempoPermitido}"></s:textfield>                                
+                            <s:submit key="save"></s:submit>
+                        </s:form>
+                    </s:if>
+                    <s:else>
+                        <h3><s:text name="create"></s:text></h3>
                         <s:form namespace="/parking" action="createParking" validate="true">
                             <s:textfield key="matricula"></s:textfield>                            
                             <s:textfield key="modelo"></s:textfield>                                
                             <s:textfield key="entrada"></s:textfield>                                
                             <s:textfield key="salida"></s:textfield>                                
                             <s:textfield key="tiempoPermitido"></s:textfield>
-                            <s:submit value="Guardar"></s:submit>
+                            <s:submit key="save"></s:submit>
                         </s:form>
+                    </s:else>            
+                    <p><s:text name="warning"></s:text><p>
                     </s:i18n>
-                </s:else>
-                <p><strong>Nota:</strong> Para guardar un veh&iacute;culo que no ha salido, introducir <em>-1</em> en <em>salida</em><p>
             </section>
         </article>
 

@@ -11,14 +11,16 @@
         <action name="forwardToParkingEdit" class="actions.parking.edit.EditParkingActionSupport"> 
             <result name="success">parking.jsp</result>
             <result name="error">index/index.jsp</result>
+            <result name="input">parking.jsp</result>  
         </action>
         <!--Accion para guardar los cambios en el parking. Al poner ${} como nombre de la acction,
         se parsea un string vacio y se reenvia a la accion por defecto-->
-        <action name="editParking" class="actions.parking.edit.EditParkingActionSupport" method="editParking"> 
+        <action name="editParking" class="actions.parking.edit.ParkingActionSupport" method="editParking"> 
             <result type="redirectAction">
                 <param name="actionName">${}</param>
                 <param name="namespace">/</param>
-            </result>            
+            </result>
+            <result name="input">parking.jsp</result>           
         </action>
     </package>
     <!--Paquete para controlar el borrado de parkings-->

@@ -25,7 +25,7 @@ public class EditParkingActionSupport extends ActionSupport {
     String modelo;
     String entrada;
     String salida;
-    String tiempoPermitido;
+    int tiempoPermitido;
 
     public EditParkingActionSupport() {
     }
@@ -58,8 +58,8 @@ public class EditParkingActionSupport extends ActionSupport {
             int mins = Integer.parseInt(salida.split(":")[1]);
             parking.setSalida(hours * 60 + mins);
         }
-        if (tiempoPermitido.matches("\\d+")) {
-            parking.setTiempoPermitido(Integer.parseInt(tiempoPermitido));
+        if (tiempoPermitido > 0) {
+            parking.setTiempoPermitido(tiempoPermitido);
         }
         Garage.updateParking(parking);
         return SUCCESS;
@@ -121,11 +121,11 @@ public class EditParkingActionSupport extends ActionSupport {
         this.salida = salida;
     }
 
-    public String getTiempoPermitido() {
+    public int getTiempoPermitido() {
         return tiempoPermitido;
     }
 
-    public void setTiempoPermitido(String tiempoPermitido) {
+    public void setTiempoPermitido(int tiempoPermitido) {
         this.tiempoPermitido = tiempoPermitido;
     }
 

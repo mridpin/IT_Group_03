@@ -18,11 +18,12 @@
             <h2>APARCAMIENTOS</h2>
             <table border="1">        
                 <tr>                
-                    <th>Matr&iacute;cula</th>
-                    <th>Modelo</th>
-                    <th>Hora de entrada</th>
-                    <th>Hora de salida</th>
-                    <th>Tiempo permitido</th>                
+                    <th><s:text name="matricula"></s:text></th>
+                    <th><s:text name="modelo"></s:text></th>
+                    <th><s:text name="entrada"></s:text></th>
+                    <th><s:text name="salida"></s:text></th>
+                    <th><s:text name="tiempoPermitido"></s:text></th>
+                                    
                     <th>
                         <s:form namespace="/parking" action="forwardToParkingCreate">
                             <s:hidden name="create" value="create" />
@@ -57,6 +58,7 @@
                         -->
                         <td>
                             <s:form namespace="/parking" action="forwardToParkingEdit">
+                                <s:hidden name="edit" value="edit" />
                                 <s:hidden name="index" value="%{#parking.matricula}" />
                                 <s:submit type="image" src="index/imgs/edit.png" width="40px" value="submit"></s:submit>
                             </s:form>
