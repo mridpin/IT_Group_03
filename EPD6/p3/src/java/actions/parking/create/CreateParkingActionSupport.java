@@ -22,7 +22,6 @@ public class CreateParkingActionSupport extends ActionSupport {
     String index;
     ParkingFormatted parkingFormatted;
     Parking parking;
-    String isEdit; //Variable que se emplea en parkings.jsp pasa saber si estamos editando o creando
 
     String matricula;
     String modelo;
@@ -31,23 +30,6 @@ public class CreateParkingActionSupport extends ActionSupport {
     int tiempoPermitido;
 
     public CreateParkingActionSupport() {
-    }
-
-    public String execute() throws Exception {
-        this.setIsEdit("isCreate");
-        return SUCCESS;
-    }
-
-    public String forwardEdit() throws Exception {
-        List<Parking> parkings = Garage.currentSpots();
-        for (Parking p : parkings) {
-            if (p.getMatricula().equals(index)) {
-                this.setParkingFormatted(this.formatParking(p));
-                this.setIsEdit("isEdit");
-                return SUCCESS;
-            }
-        }
-        return ERROR;
     }
 
     public String editParking() throws Exception {
@@ -102,14 +84,6 @@ public class CreateParkingActionSupport extends ActionSupport {
 
     public void setParking(Parking parking) {
         this.parking = parking;
-    }
-
-    public String getIsEdit() {
-        return isEdit;
-    }
-
-    public void setIsEdit(String isEdit) {
-        this.isEdit = isEdit;
     }
 
     public String getMatricula() {

@@ -23,8 +23,7 @@
                     <s:set name="isEdit" value="isEdit"/>
                     <s:if test="%{#isEdit=='isEdit'}">                    
                         <h3><s:text name="edit"></s:text></h3>
-                        <s:form namespace="/parking" action="editParking" validate="true">
-                            <s:textfield key="matricula.required"></s:textfield>            
+                        <s:form namespace="/parking" action="editParking" validate="true">          
                             <s:textfield key="matricula" disabled="disabled" value="%{parkingFormatted.matricula}"></s:textfield>                                
                             <s:textfield key="modelo" value="%{parkingFormatted.modelo}"></s:textfield>                                
                             <s:textfield key="entrada" value="%{parkingFormatted.entrada}"></s:textfield>                                

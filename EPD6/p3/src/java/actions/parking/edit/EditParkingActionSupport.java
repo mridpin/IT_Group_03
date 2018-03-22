@@ -14,23 +14,20 @@ import model.ParkingFormatted;
 /**
  *
  * @author ridao
+ * Esta clase se encarga de redirigir desde index.jsp a parking.jsp indicando si se esta modificando o creando un parking
+ * para mostrar el formulario adecuado
+ * Las operaciones CRUD de editar y crear y las validaciones se hacen en la clase CreateParkingActionSupport
  */
 public class EditParkingActionSupport extends ActionSupport {
 
     String index;
-    Parking parking;
     ParkingFormatted parkingFormatted;
-    String isEdit; //Variable que se emplea en parkings.jsp pasa saber si estamos editando o creando
-    String matricula;
-    String modelo;
-    String entrada;
-    String salida;
-    int tiempoPermitido;
+    String isEdit;
 
     public EditParkingActionSupport() {
     }
 
-    public String execute() throws Exception {
+    public String toEdit() throws Exception {
         List<Parking> parkings = Garage.currentSpots();
         for (Parking p : parkings) {
             if (p.getMatricula().equals(index)) {
@@ -41,27 +38,9 @@ public class EditParkingActionSupport extends ActionSupport {
         }
         return ERROR;
     }
-
-    public String editParking() throws Exception {
-        parking = new Parking();
-        parking.setMatricula(matricula);
-        parking.setModelo(modelo);
-        if (entrada.matches("\\d\\d:\\d\\d")) {
-            int hours = Integer.parseInt(entrada.split(":")[0]);
-            int mins = Integer.parseInt(entrada.split(":")[1]);
-            parking.setEntrada(hours * 60 + mins);
-        }
-        if (salida.matches("-?\\d")) {
-            parking.setSalida(Integer.parseInt(salida));
-        } else if (salida.matches("\\d\\d:\\d\\d")) {
-            int hours = Integer.parseInt(salida.split(":")[0]);
-            int mins = Integer.parseInt(salida.split(":")[1]);
-            parking.setSalida(hours * 60 + mins);
-        }
-        if (tiempoPermitido > 0) {
-            parking.setTiempoPermitido(tiempoPermitido);
-        }
-        Garage.updateParking(parking);
+    
+    public String toCreate() throws Exception {
+        this.setIsEdit("isCreate");
         return SUCCESS;
     }
 
@@ -73,61 +52,13 @@ public class EditParkingActionSupport extends ActionSupport {
         this.index = index;
     }
 
-    public Parking getParking() {
-        return parking;
-    }
-
-    public void setParking(Parking parking) {
-        this.parking = parking;
-    }
-
     public String getIsEdit() {
         return isEdit;
     }
 
     public void setIsEdit(String isEdit) {
         this.isEdit = isEdit;
-    }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public String getEntrada() {
-        return entrada;
-    }
-
-    public void setEntrada(String entrada) {
-        this.entrada = entrada;
-    }
-
-    public String getSalida() {
-        return salida;
-    }
-
-    public void setSalida(String salida) {
-        this.salida = salida;
-    }
-
-    public int getTiempoPermitido() {
-        return tiempoPermitido;
-    }
-
-    public void setTiempoPermitido(int tiempoPermitido) {
-        this.tiempoPermitido = tiempoPermitido;
-    }
+    }    
 
     public ParkingFormatted getParkingFormatted() {
         return parkingFormatted;
@@ -138,7 +69,6 @@ public class EditParkingActionSupport extends ActionSupport {
     }
 
     public ParkingFormatted formatParking(Parking parking) {
-
         String entrada = String.format("%02d", parking.getEntrada() / 60) + ":" + String.format("%02d", parking.getEntrada() % 60);
         String salida;
         if (parking.getSalida() != -1) {
@@ -150,5 +80,4 @@ public class EditParkingActionSupport extends ActionSupport {
 
         return park;
     }
-
 }

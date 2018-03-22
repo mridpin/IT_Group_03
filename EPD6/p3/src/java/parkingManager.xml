@@ -8,14 +8,13 @@
     <!-- Paquete para controlar la edicion de parkings -->
     <package name="edit" namespace="/parking" extends="struts-default">
         <!--Accion para redireccionar a parking.jsp presentando los datos del parking seleccionado-->
-        <action name="forwardToParkingEdit" class="actions.parking.edit.EditParkingActionSupport"> 
+        <action name="forwardToParkingEdit" class="actions.parking.edit.EditParkingActionSupport" method="toEdit"> 
             <result name="success">parking.jsp</result>
             <result name="error">index/index.jsp</result>
-            <result name="input">parking.jsp</result>  
         </action>
         <!--Accion para guardar los cambios en el parking. Al poner ${} como nombre de la acction,
         se parsea un string vacio y se reenvia a la accion por defecto-->
-        <action name="editParking" class="actions.parking.edit.ParkingActionSupport" method="editParking"> 
+        <action name="editParking" class="actions.parking.create.CreateParkingActionSupport" method="editParking"> 
             <result type="redirectAction">
                 <param name="actionName">${}</param>
                 <param name="namespace">/</param>
@@ -36,7 +35,7 @@
     <!-- Paquete para controlar la creacion de parkings -->
     <package name="create" namespace="/parking" extends="struts-default">
         <!--Accion para redireccionar a parking.jsp presentando los datos del parking seleccionado-->
-        <action name="forwardToParkingCreate" class="actions.parking.create.CreateParkingActionSupport"> 
+        <action name="forwardToParkingCreate"  class="actions.parking.edit.EditParkingActionSupport" method="toCreate"> 
             <result name="success">parking.jsp</result>
             <result name="error">index/index.jsp</result>
             <result name="input">parking.jsp</result>    
