@@ -57,6 +57,34 @@
             
         </action>
         
+        <!--
+        
+        Show form to add new book
+        
+        -->
+        
+        <action name="addForm">
+            <result>add.jsp</result>
+        </action>
+        
+        <!--
+        
+        Add new Book action
+        
+        -->
+        
+        
+         <action name="createBook" class="libreria.actions.CreateLibroActionSupport">
+             
+            <result name="success" type="chain">
+                
+                <param name="actionName">first</param>
+                
+                
+            </result>
+            <result name="input">add.jsp</result>
+        </action>
+        
     </package>
 
     

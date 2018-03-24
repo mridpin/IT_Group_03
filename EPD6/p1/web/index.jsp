@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Grupo 03 - EPD05 P1</title>
+        <title>Grupo 03 - EPD06 P1</title>
     </head>
     <body>
 
@@ -65,6 +65,12 @@
         </s:form>
 
         </s:if>
+    
+         <s:form action="addForm">
+
+            <s:submit value="Agregar libro" name="submit"/>
+
+        </s:form>
 
 
     </body>

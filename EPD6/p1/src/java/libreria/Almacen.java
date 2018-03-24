@@ -65,6 +65,33 @@ public class Almacen{
         tx.commit();
         return libro;
     }
+    
+    //Returns the editorial with the given value
+    public Editorial consultaEditorial(int id)
+    {
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Editorial editorial = null;
+        //abrimos una transaccion en hibernate para poder ejecutar consultas
+        org.hibernate.Transaction tx = session.beginTransaction();
+        Query q = session.createQuery("from Editorial where id = '" + id + "'");
+        editorial = (Editorial) q.uniqueResult();
+//muy importante hacer commit para que se termine de ejecutar y cerrar la transaccion. Sino se especifica, la transaccion queda abierta y no permite ejecutar otras
+        tx.commit();
+        return editorial;
+    }
+    
+    
+    public void nuevoLibro(Libro l)
+    {
+        
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        org.hibernate.Transaction tx = session.beginTransaction();
+        
+        //This directly saves the book into DB
+        session.save(l);
+        tx.commit();
+    }
+    
 
     public List<Libro> consultaLibrosDisponibles() throws SQLException {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
