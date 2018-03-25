@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18-mar-2018 1:20:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="garage2" name="model.Parkingspot" optimistic-lock="version" table="Parkingspot">
+    <id name="matricula" type="string">
+      <column length="8" name="Matricula"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="modelo" type="string">
+      <column length="20" name="Modelo" not-null="true"/>
+    </property>
+    <property name="horaEntrada" type="int">
+      <column length="16" name="horaEntrada" not-null="true"/>
+    </property>
+    <property name="horaSalida" type="int">
+      <column length="16" name="horaSalida" not-null="true"/>
+    </property>
+    <property name="tiempoPermitido" type="int">
+      <column name="tiempoPermitido" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>
