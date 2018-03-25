@@ -6,7 +6,6 @@
 package actions;
 
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.ArrayList;
 import java.util.List;
 import model.Garage;
 import model.Parking;

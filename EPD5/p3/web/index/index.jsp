@@ -26,7 +26,7 @@
                     <th>
                         <s:form namespace="/parking" action="forwardToParkingCreate">
                             <s:hidden name="create" value="create" />
-                            <s:submit type="image" src="index/imgs/add.png" width="40px" value="submit"></s:submit>
+                            <s:submit type="image" src="index/imgs/add.png" width="40px" value="create"></s:submit>
                         </s:form>
                     </th>                
                 </tr>
@@ -58,14 +58,14 @@
                         <td>
                             <s:form namespace="/parking" action="forwardToParkingEdit">
                                 <s:hidden name="index" value="%{#parking.matricula}" />
-                                <s:submit type="image" src="index/imgs/edit.png" width="40px" value="submit"></s:submit>
+                                <s:submit type="image" src="index/imgs/edit.png" width="40px" value="edit"></s:submit>
                             </s:form>
                         </td>
                         <td>
                             <s:form namespace="/parking" action="deleteParking">
                                 <s:hidden name="delete" value="delete" />
                                 <s:hidden name="index" value="%{#parking.matricula}" />
-                                <s:submit type="image" src="index/imgs/cancel.png" width="40px" value="submit"></s:submit>
+                                <s:submit type="image" src="index/imgs/cancel.png" width="40px" value="delete"></s:submit>
                             </s:form>
                         </td>
                     </tr>
@@ -90,11 +90,11 @@
         <section>
             <h3>B&uacute;squedas</h3>
             <s:form namespace="/search" action="searchByPlate" >
-                <s:textfield type="text" label="Por matr&iacute;cula" name="matricula"></s:textfield>
+                <s:textfield type="text" label="Por matrícula" name="matricula"></s:textfield>
                 <s:submit value="Buscar" ></s:submit>
             </s:form>
             <s:form namespace="/search" action="showParked" >                
-                <s:submit value="Mostrar veh&iacute;culos aparcados" ></s:submit>
+                <s:submit value="Mostrar vehículos aparcados" ></s:submit>
             </s:form>
         </section>
     </article>
