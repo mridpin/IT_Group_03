@@ -105,7 +105,6 @@ public class CreateLibroActionSupport extends ActionSupport{
         //We set all of the parameters of the book to be added
         Libro l = new Libro();
         l.setAutor(autor);
-        //l.setId(Integer.parseInt(id));
         l.setPrecio(Float.parseFloat(precio));
         l.setTitulo(titulo);
         l.setIsbn(Integer.parseInt(isbn));
