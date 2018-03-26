@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 
 public class Almacen{
 
@@ -102,4 +104,16 @@ public class Almacen{
         tx.commit();
         return resultados;
     }
+    
+    public List consultaEditorialesDisponibles(){
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        org.hibernate.Transaction tx = session.beginTransaction();
+        //This assures that we only get the column id from the query http://www.java2s.com/Tutorial/Java/0350__Hibernate/SelectSpecificFieldsinaEntitywithCriteriaandProjections.htm
+        Criteria q = session.createCriteria(Editorial.class).setProjection(Projections.projectionList().add(Projections.property("id")));
+        List resultados = q.list();
+//muy importante hacer commit para que se termine de ejecutar y cerrar la transaccion. Sino se especifica, la transaccion queda abierta y no permite ejecutar otras
+        tx.commit();
+        return resultados;
+    }
+    
 }

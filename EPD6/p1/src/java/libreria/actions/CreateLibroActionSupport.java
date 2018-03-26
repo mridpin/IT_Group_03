@@ -22,13 +22,86 @@ public class CreateLibroActionSupport extends ActionSupport{
     private String precio;
     private String isbn;
     
+    
+    
     public void validate()
     {
-        //TODO: Add validation
         
+        //Autor must be provided
+        if(this.getAutor().length()!=0)
+        {
+            //Autor must only be characters and spaces
+            if(!this.getAutor().matches("^[a-zA-Z\\s]+$"))
+            {
+                addFieldError("autor","El campo autor solamente debe tener letras");
+            }
+        }
+        else
+        {
+            addFieldError("autor","El campo autor no puede estar vacío");
+        }
+        //Titulo must be provided
+        if(this.getTitulo().length()==0)
+        {
+            addFieldError("titulo","El campo titulo no puede estar vacío");
+        }
+        //Precio must be provided and a double
+        if(this.getPrecio().length()!=0)
+        {
+            //https://stackoverflow.com/questions/1547574/regex-for-prices
+            if(!this.getPrecio().matches("\\d{1,3}(?:[.,]\\d{3})*(?:[.,]\\d{2})?"))
+            {
+                addFieldError("precio","El campo precio debe ser positivo y numérico ");
+            }
+        }
+        else
+        {
+            addFieldError("precio","El campo precio no puede estar vacío");
+        }
         
-        //If all validation is passed
+        //Isbn must be provided
+         if(this.getIsbn().length()!=0)
+        {
+           
+            //ISBN must be a 3 digit number
+            if(!this.getIsbn().matches("[0-9]{3}"))
+            {
+                addFieldError("isbn","El isbn debe tener 3 dígitos");
+            }
+            
+        }
+         else
+         {
+              addFieldError("isbn","El campo isbn no puede estar vacío");
+         }
+         //Editorial must be provided
+         if(this.getEditorialid().length()!=0)
+         {
+            //Editorial must be a number of 10 digits max
+            if(this.getEditorialid().matches("[0-9]{1,10}"))
+            {
+                Integer id = Integer.parseInt(this.getEditorialid());
+                //Editorial ID must exist
+                if(!new Almacen().consultaEditorialesDisponibles().contains(id))
+                {
+                    addFieldError("editorialid","La editorial debe ser válida");
+                }
+            }
+            else
+            {
+                addFieldError("editorialid","El campo Editorial debe ser numérico ");
+            }
+         }
+         else
+         {
+          addFieldError("editorialid","El campo Editorial ID no puede estar vacío");
+         }
         
+    }
+    
+    public String addBook()
+    {
+        try{
         //We set all of the parameters of the book to be added
         Libro l = new Libro();
         l.setAutor(autor);
@@ -42,6 +115,13 @@ public class CreateLibroActionSupport extends ActionSupport{
         //Then we add it
         
         new Almacen().nuevoLibro(l);
+        
+        return SUCCESS;
+        }
+        catch(Exception ex)
+        {
+            return ERROR;
+        }
         
     }
     

@@ -14,18 +14,18 @@
         
         <s:form action="createBook">
             
-            <s:textfield name="titulo" label="T&iacute;tulo"></s:textfield>
+            <s:textfield name="titulo" label="Título"></s:textfield>
             <s:textfield name="autor" label="Autor"></s:textfield>
             <s:textfield name="precio" label="Precio"></s:textfield>
             <s:textfield name="isbn" label="ISBN"></s:textfield>
             <s:textfield name="editorialid" label="Editorial ID"></s:textfield>
-            <s:submit value="add"></s:submit>
+            <s:submit value="Confirmar"></s:submit>
             
         </s:form>
         
         <s:form action="first">
 
-            <s:submit value="Atr&aacute;" name="submit"/>
+            <s:submit value="Atrás" name="submit"/>
 
         </s:form>
         

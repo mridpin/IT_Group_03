@@ -3,6 +3,8 @@ package libreria.actions;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,8 +99,8 @@ public class AlmacenAction extends ActionSupport{
         {
             total+=selected.get(i).getPrecio();
         }
-        
-        session.put("total",total);
+        //Formatting of total
+        session.put("total",BigDecimal.valueOf(total).setScale(3,RoundingMode.HALF_UP).doubleValue());
         
         return SUCCESS;
         

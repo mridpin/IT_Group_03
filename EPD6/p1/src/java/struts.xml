@@ -69,7 +69,27 @@
         
         <!--
         
-        Add new Book action
+        Adds book to the DB
+        
+        -->
+        
+        
+        <action name="addBook" class="libreria.actions.CreateLibroActionSupport" method="addBook">
+             
+            <result name="success" type="chain">
+                
+                <param name="actionName">first</param>
+                
+                
+            </result>
+            <result name="error">error.jsp</result>
+        </action>
+        
+        
+        <!--
+        
+        Add new Book action that validates the book, it's successful, we call addBook to 
+        add the book to the DB
         
         -->
         
@@ -78,10 +98,11 @@
              
             <result name="success" type="chain">
                 
-                <param name="actionName">first</param>
+                <param name="actionName">addBook</param>
                 
                 
             </result>
+            
             <result name="input">add.jsp</result>
         </action>
         
