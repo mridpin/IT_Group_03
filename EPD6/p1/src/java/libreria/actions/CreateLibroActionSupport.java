@@ -45,6 +45,7 @@ public class CreateLibroActionSupport extends ActionSupport{
         {
             addFieldError("titulo","El campo titulo no puede estar vacío");
         }
+        
         //Precio must be provided and a double
         if(this.getPrecio().length()!=0)
         {
@@ -74,6 +75,7 @@ public class CreateLibroActionSupport extends ActionSupport{
          {
               addFieldError("isbn","El campo isbn no puede estar vacío");
          }
+         
          //Editorial must be provided
          if(this.getEditorialid().length()!=0)
          {
