@@ -36,21 +36,21 @@ public class CreateParkingActionSupport extends ActionSupport {
         parking = new Parking();
         parking.setMatricula(matricula);
         parking.setModelo(modelo);
-        if (entrada.matches("\\d\\d:\\d\\d")) {
-            int hours = Integer.parseInt(entrada.split(":")[0]);
-            int mins = Integer.parseInt(entrada.split(":")[1]);
-            parking.setEntrada(hours * 60 + mins);
-        }
-        if (salida.matches("-?\\d")) {
-            parking.setSalida(Integer.parseInt(salida));
-        } else if (salida.matches("\\d\\d:\\d\\d")) {
-            int hours = Integer.parseInt(salida.split(":")[0]);
-            int mins = Integer.parseInt(salida.split(":")[1]);
+        int hours;
+        int mins;
+        hours = Integer.parseInt(entrada.split(":")[0]);
+        mins = Integer.parseInt(entrada.split(":")[1]);
+        parking.setEntrada(hours * 60 + mins);
+
+        if (salida.matches("")) {
+            parking.setSalida(-1);
+        } else {
+            hours = Integer.parseInt(salida.split(":")[0]);
+            mins = Integer.parseInt(salida.split(":")[1]);
             parking.setSalida(hours * 60 + mins);
         }
-        if (tiempoPermitido > 0) {
-            parking.setTiempoPermitido(tiempoPermitido);
-        }
+        parking.setTiempoPermitido(tiempoPermitido);
+
         Garage.updateParking(parking);
         return SUCCESS;
     }
@@ -59,21 +59,17 @@ public class CreateParkingActionSupport extends ActionSupport {
         parking = new Parking();
         parking.setMatricula(matricula);
         parking.setModelo(modelo);
-        if (entrada.matches("\\d\\d:\\d\\d")) {
-            int hours = Integer.parseInt(entrada.split(":")[0]);
-            int mins = Integer.parseInt(entrada.split(":")[1]);
-            parking.setEntrada(hours * 60 + mins);
-        }
-        if (salida.matches("-?\\d")) {
-            parking.setSalida(Integer.parseInt(salida));
-        } else if (salida.matches("\\d\\d:\\d\\d")) {
-            int hours = Integer.parseInt(salida.split(":")[0]);
-            int mins = Integer.parseInt(salida.split(":")[1]);
+        int hours, mins;
+        hours = Integer.parseInt(entrada.split(":")[0]);
+        mins = Integer.parseInt(entrada.split(":")[1]);
+        parking.setEntrada(hours * 60 + mins);
+        if (salida.matches("")) {
+            parking.setSalida(-1);
+        } else {
             parking.setSalida(hours * 60 + mins);
         }
-        if (tiempoPermitido > 0) {
-            parking.setTiempoPermitido(tiempoPermitido);
-        }
+        parking.setTiempoPermitido(tiempoPermitido);
+
         Garage.createParking(parking);
         return SUCCESS;
     }

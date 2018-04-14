@@ -92,11 +92,11 @@
         <section>
             <h3>B&uacute;squedas</h3>
             <s:form namespace="/search" action="searchByPlate" >
-                <s:textfield type="text" label="Por matr&iacute;cula" name="matricula"></s:textfield>
+                <s:textfield type="text" label="Por matrícula" name="matricula"></s:textfield>
                 <s:submit value="Buscar" ></s:submit>
             </s:form>
             <s:form namespace="/search" action="showParked" >                
-                <s:submit value="Mostrar veh&iacute;culos aparcados" ></s:submit>
+                <s:submit value="Mostrar vehículos aparcados" ></s:submit>
             </s:form>
         </section>
     </article>
