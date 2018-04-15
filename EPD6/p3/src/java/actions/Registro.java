@@ -26,6 +26,8 @@ public class Registro extends ActionSupport{
     private String paginaWeb;
     private double precio;
     private Date date;
+    
+    private String urlRegex="^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\?=.-]*)*\\/?$";
 
     public String getNombre() {
         return nombre;
@@ -116,7 +118,7 @@ public class Registro extends ActionSupport{
         return paginaWeb;
     }
     @RequiredStringValidator(key = "paginaWeb.required")
-    @ExpressionValidator(key = "paginaWeb.fail", expression = "/^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\?=.-]*)*\\/?$/")
+    @UrlValidator(key = "paginaWeb.fail")
     public void setPaginaWeb(String paginaWeb) {
         this.paginaWeb = paginaWeb;
     }
