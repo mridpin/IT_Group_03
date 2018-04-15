@@ -20,6 +20,10 @@
             <s:textfield name="peso" key="peso"/>
             <s:textfield name="altura" key="altura"/>
             <s:textfield name="edad" key="edad"/>
+            <s:textfield name="paginaWeb" key="paginaWeb"/>
+            <s:textfield name="date" key="date"/>
+            <s:textfield name="precio"  key="precio"/>
+            <s:textfield name="tarjeta" key="tarjeta"/>
             <s:submit name="enviar"/>
         </s:form>
     </body>

@@ -7,6 +7,7 @@ package actions;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.Date;
 
 /**
  *
@@ -21,6 +22,10 @@ public class Registro extends ActionSupport{
     private int edad;
     private String contrasenia;
     private int altura;
+    private String paginaWeb;
+    private double precio;
+    private String tarjeta;
+    private Date date;
 
     public String getNombre() {
         return nombre;
@@ -84,6 +89,38 @@ public class Registro extends ActionSupport{
 
     public void setAltura(int altura) {
         this.altura = altura;
+    }
+
+    public String getPaginaWeb() {
+        return paginaWeb;
+    }
+
+    public void setPaginaWeb(String paginaWeb) {
+        this.paginaWeb = paginaWeb;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public String getTarjeta() {
+        return tarjeta;
+    }
+
+    public void setTarjeta(String tarjeta) {
+        this.tarjeta = tarjeta;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
 

@@ -11,17 +11,7 @@
             <message key="apellidos.required"/>
         </field-validator>
     </field>
-    <field name="dni">
-        <field-validator type="requiredstring">
-            <message key="dni.required"/>
-        </field-validator>
-        <field-validator type="stringlength">
-             <param name="minLength">9</param>
-             <param name="maxLength">9</param>
-             <param name="trim">true</param>
-             <message key="dni.fail"/>
-        </field-validator>
-    </field>
+
     <field name="email">
         <field-validator type="requiredstring">
             <message key="email.required"/>
@@ -32,8 +22,8 @@
     </field>
     <field name="edad">
          <field-validator type="int">
-             <param name="min">14</param>
-             <param name="max">70</param>
+             <param name="min">18</param>
+             <param name="max">65</param>
              <message key="edad.required"/>
          </field-validator>
      </field>
@@ -59,53 +49,60 @@
             <message key="contrasenia.required"/>
         </field-validator>
     </field>
-  
-
-    
-    
-    
-    
-    
-    <!--<validator type="requiredstring">
-      <param name="fieldName">Registro.nombre</param>
-      <message>Nombre is required.</message>
-   </validator>
-   <validator type="requiredstring">
-      <param name="fieldName">Registro.apellidos</param>
-      <message>Apellidos is required.</message>
-   </validator>
-   <validator type="requiredstring">
-      <param name="fieldName">Registro.dni</param>
-      <message key="dni.required" />
-   </validator>
-   <validator type="regex">
+    <field name="paginaWeb">
+        <field-validator type="requiredstring">
+            <message key="paginaWeb.required"/>
+        </field-validator>
+    </field>
+   <field name="precio">
+        <field-validator type="double">
+            <param name="minInclusive">5</param>
+            <message key="precio.fail"/>
+        </field-validator>
+    </field>
+   <field name="tarjeta">
+        <field-validator type="regex">
+            <param name="regex">^3[47][0-9]{13}$</param>
+            <message key="tarjeta.fail"/>
+        </field-validator>
+    </field>
+    <field name="tarjeta">
+        <field-validator type="requiredstring">
+            <message key="tarjeta.required"/>
+        </field-validator>
+    </field>
+    <field name="tarjeta">
+        <field-validator type="required">
+            <message key="tarjeta.required"/>
+        </field-validator>
+    </field>
+    <field name="dni">
+        <field-validator type="requiredstring">
+            <message key="dni.required"/>
+        </field-validator>
+    </field>
+        <field name="dni">
+        <field-validator type="regex">
+            <param name="regex">^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$</param>
+            <message key="dni.fail"/>
+        </field-validator>
+         </field>
+         
+         <field name="date">
+        <field-validator type="required">
+            <message key="date.required"/>
+        </field-validator>
+    </field>
+    <field name="date">
+        <field-validator type="date">
+            <param name="min">01/01/2018</param>
+            <param name="max">01/01/2019</param>
+            <message key="date.fail"></message>
+        </field-validator>
+    </field>
+   <!--<validator type="regex">
        <param name="fieldName">Registro.dni</param>
        <param name="regex"><![CDATA[^(([A-Z]\d{8})|\d{8}|(\d{8}[A-Z])|([A-Z]\d{8}[A-Z]))$]]></param>
-   </validator>
-   <validator type="email">
-      <param name="fieldname">Registro.email</param>
-      <message key="email.required" />
-   </validator>
-   <validator type="requiredstring">
-      <param name="fieldName">Registro.contrasenia</param>
-      <message key="password.required" />
-   </validator>
-   <validator type="double">
-        <param name="fieldName">peso</param>
-        <param name="min">40.0</param>
-        <param name="max">200.0</param>
-        <message key="peso.rango" />
-    </validator>
-    <validator type="int">
-        <param name="fieldName">edad</param>
-        <param name="min">17</param>
-        <param name="max">100</param>
-        <message key="edad.rango" />
-    </validator>
-    <validator type="int">
-        <param name="fieldName">altura</param>
-        <param name="min">100</param>
-        <param name="max">260</param>
-        <message key="altura.rango"/>
-    </validator>-->
+   </validator>-->
+
 </validators>

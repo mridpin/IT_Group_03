@@ -8,6 +8,7 @@ package actions;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.*;
+import java.util.Date;
 
 /**
  *
@@ -19,9 +20,13 @@ public class Registro extends ActionSupport{
     private String dni;
     private String email;
     private double peso;
-    private int edad;
+    private String edad;
     private String contrasenia;
     private int altura;
+    private String tarjeta;
+    private String paginaWeb;
+    private double precio;
+    private Date date;
 
     public String getNombre() {
         return nombre;
@@ -31,7 +36,6 @@ public class Registro extends ActionSupport{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
     public String getApellidos() {
         return apellidos;
     }
@@ -46,6 +50,7 @@ public class Registro extends ActionSupport{
     }
 
     @RequiredStringValidator(key = "dni.required")
+    @RegexFieldValidator(regex = "^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$", key="dni.fail")
     public void setDni(String dni) {
         this.dni = dni;
     }
@@ -64,17 +69,19 @@ public class Registro extends ActionSupport{
         return peso;
     }
 
-    @DoubleRangeFieldValidator(key = "peso.required", minInclusive = "35", maxInclusive = "200")
+    @RequiredFieldValidator(key = "peso.required")
+    @DoubleRangeFieldValidator(key = "peso.fail", minInclusive = "35", maxInclusive = "200")
     public void setPeso(double peso) {
         this.peso = peso;
     }
 
-    public int getEdad() {
+    public String getEdad() {
         return edad;
     }
-
-    @IntRangeFieldValidator(key = "edad.required", min = "14", max = "70")
-    public void setEdad(int edad) {
+    
+    @RequiredStringValidator(key = "edad.required")
+    @RegexFieldValidator(regex = "^(?:1[89]|[2-5]\\d|6[0-5])$", key="age.fail")
+    public void setEdad(String edad) {
         this.edad = edad;
     }
     public String getContrasenia() {
@@ -89,10 +96,48 @@ public class Registro extends ActionSupport{
     public int getAltura() {
         return altura;
     }
-
-    @IntRangeFieldValidator(key = "altura.required", min = "120", max = "270")
+    
+    @RequiredFieldValidator(key="altura.required")
+    @IntRangeFieldValidator(min = "120", max = "270", key = "altura.fail")
     public void setAltura(int altura) {
         this.altura = altura;
+    }
+
+    public String getTarjeta() {
+        return tarjeta;
+    }
+    
+    @RequiredStringValidator(key = "tarjeta.required")
+    @RegexFieldValidator(regex = "^3[47][0-9]{13}$", key="tarjeta.fail")
+    public void setTarjeta(String tarjeta) {
+        this.tarjeta = tarjeta;
+    }
+
+    public String getPaginaWeb() {
+        return paginaWeb;
+    }
+    @RequiredStringValidator(key = "paginaWeb.required")
+    @ExpressionValidator(key = "paginaWeb.fail", expression = "/^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\?=.-]*)*\\/?$/")
+    public void setPaginaWeb(String paginaWeb) {
+        this.paginaWeb = paginaWeb;
+    }
+    
+    public double getPrecio() {
+        return precio;
+    }
+    @RequiredFieldValidator(key = "precio.required")
+    @DoubleRangeFieldValidator(key = "precio.fail", minInclusive = "5")
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+    @RequiredFieldValidator(key = "date.required")
+    @DateRangeFieldValidator(min = "1/1/2018", max = "12/31/2018", key = "date.fail")
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Registro() {
