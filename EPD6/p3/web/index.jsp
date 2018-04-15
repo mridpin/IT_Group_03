@@ -11,7 +11,7 @@
     </head>
     <body>
         <h1>Formulario de registro Parque de Atracciones</h1>
-        <s:form action="/actions/Registro.action" method="post">
+        <s:form action="validate" method="post">
             <s:textfield name="nombre" key="nombre"/>
             <s:textfield name="apellidos" key="apellidos"/>
             <s:textfield name="dni" key="dni"/>
@@ -26,5 +26,6 @@
             <s:textfield name="tarjeta" key="tarjeta"/>
             <s:submit name="enviar"/>
         </s:form>
+
     </body>
 </html>

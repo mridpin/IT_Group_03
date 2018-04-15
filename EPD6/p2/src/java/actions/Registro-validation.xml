@@ -87,7 +87,6 @@
             <message key="dni.fail"/>
         </field-validator>
          </field>
-         
          <field name="date">
         <field-validator type="required">
             <message key="date.required"/>

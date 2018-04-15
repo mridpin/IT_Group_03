@@ -5,14 +5,13 @@
  */
 package actions;
 
-import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.*;
 import java.util.Date;
 
 /**
  *
- * @author Javi
+
  */
 public class Registro extends ActionSupport{
     private String nombre;
@@ -80,7 +79,7 @@ public class Registro extends ActionSupport{
     }
     
     @RequiredStringValidator(key = "edad.required")
-    @RegexFieldValidator(regex = "^(?:1[89]|[2-5]\\d|6[0-5])$", key="age.fail")
+    @RegexFieldValidator(regex = "^(?:1[89]|[2-5]\\d|6[0-5])$", key="edad.fail")
     public void setEdad(String edad) {
         this.edad = edad;
     }
@@ -138,9 +137,6 @@ public class Registro extends ActionSupport{
     @DateRangeFieldValidator(min = "1/1/2018", max = "12/31/2018", key = "date.fail")
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Registro() {
     }
     
 }

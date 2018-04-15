@@ -7,17 +7,17 @@
     <package name="default" extends="struts-default">
         <action name="">
             <result type="chain">
-                <param name="actionName">default</param>
+                <param name="actionName">first</param>
             </result>
         </action> 
     </package>
     <package name="registro" extends="struts-default">
-        <action name="default">
-            <result>/index.jsp</result>
+        <action name="first">
+            <result>index.jsp</result>
         </action>
-        <action name="Registro" class="actions.Registro">
-            <result name="input">/index.jsp</result>
-            <result name="success">/registered.jsp</result>
+        <action name="validate" class="actions.Registro">
+            <result name="success">registered.jsp</result>
+            <result name="input">index.jsp</result>
         </action>
     </package>
 </struts>
