@@ -53,6 +53,18 @@ public interface SingleSignOn {
 
     /**
      * 
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "usersRegistered", targetNamespace = "http://webservices/", className = "webservices.UsersRegistered")
+    @ResponseWrapper(localName = "usersRegisteredResponse", targetNamespace = "http://webservices/", className = "webservices.UsersRegisteredResponse")
+    @Action(input = "http://webservices/SingleSignOn/usersRegisteredRequest", output = "http://webservices/SingleSignOn/usersRegisteredResponse")
+    public String usersRegistered();
+
+    /**
+     * 
      * @param pass
      * @param user
      * @return
@@ -68,17 +80,5 @@ public interface SingleSignOn {
         String user,
         @WebParam(name = "pass", targetNamespace = "")
         String pass);
-
-    /**
-     * 
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "usersRegistered", targetNamespace = "http://webservices/", className = "webservices.UsersRegistered")
-    @ResponseWrapper(localName = "usersRegisteredResponse", targetNamespace = "http://webservices/", className = "webservices.UsersRegisteredResponse")
-    @Action(input = "http://webservices/SingleSignOn/usersRegisteredRequest", output = "http://webservices/SingleSignOn/usersRegisteredResponse")
-    public String usersRegistered();
 
 }

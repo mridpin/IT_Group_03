@@ -26,10 +26,11 @@
             webservices.SingleSignOn port = service.getSingleSignOnPort();
             // TODO initialize WS operation arguments here
             java.lang.String user = request.getParameter("user");
-            java.lang.String pass = request.getParameter("password");
+            java.lang.String pass = request.getParameter("pass");
             // TODO process result here
             java.lang.String result = port.login(user, pass);
-            response.addCookie(new Cookie("user", result));
+            Cookie cookie = new Cookie("user", result);
+            response.addCookie(cookie);
         } catch (Exception ex) {
             // TODO handle custom exceptions here
         }
@@ -43,14 +44,15 @@
             webservices.SingleSignOn_Service service = new webservices.SingleSignOn_Service();
             webservices.SingleSignOn port = service.getSingleSignOnPort();
             // TODO initialize WS operation arguments here
-            java.lang.String token = "";
+            java.lang.String token = cookie.getValue();
             // TODO process result here
             result = port.isAlive(token);
-            response.addCookie(cookie);
         } catch (Exception ex) {
             // TODO handle custom exceptions here
         }
-        response.sendRedirect("login.jsp");
+        if (result) {
+            response.sendRedirect("login.jsp");
+        }
     }
 
 %>
