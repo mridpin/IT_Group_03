@@ -59,7 +59,8 @@ public class Almacen {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         org.hibernate.Transaction tx = session.beginTransaction();
         Query q = session.createQuery("from Libro");
-        List resultados = (List<Libro>) q.list();
+        List resultados = (List) q.list();
+       //List resultados = new ArrayList();
 //muy importante hacer commit para que se termine de ejecutar y cerrar la transaccion. Sino se especifica, la transaccion queda abierta y no permite ejecutar otras
         tx.commit();
         return resultados;

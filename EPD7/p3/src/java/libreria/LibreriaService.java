@@ -11,10 +11,7 @@ import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 
-/**
- *
- * @author Raistlyn
- */
+
 @WebService(serviceName = "LibreriaService")
 public class LibreriaService {
 
@@ -25,8 +22,6 @@ public class LibreriaService {
      */
     @WebMethod(operationName = "listBooks")
     public List<Libro> listBooks() {
-        List<Libro> lb = new ArrayList<>();
-        lb.addAll(a.consultaLibrosDisponibles());
-        return lb;
+        return  new Almacen().consultaLibrosDisponibles();
     }
 }
