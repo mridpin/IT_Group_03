@@ -73,7 +73,7 @@ public class Libro  implements java.io.Serializable {
     
     public void incrementaCantidad()
     {
-        
+        this.cantidad++;
     }
 
     public int getCantidad() {
