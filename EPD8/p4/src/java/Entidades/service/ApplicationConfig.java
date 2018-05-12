@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package p4.service;
+package Entidades.service;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -29,8 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(p4.service.EditorialFacadeREST.class);
-        resources.add(p4.service.LibroFacadeREST.class);
+        resources.add(Entidades.service.LibroFacadeREST.class);
     }
     
 }

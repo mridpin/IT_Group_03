@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package p4.service;
+package Entidades.service;
 
+import Entidades.Libro;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,35 +18,35 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import p4.Editorial;
 
 /**
  *
  * @author Portatil
  */
 @Stateless
-@Path("p4.editorial")
-public class EditorialFacadeREST extends AbstractFacade<Editorial> {
+@Path("entidades.libro")
+public class LibroFacadeREST extends AbstractFacade<Libro> {
 
     @PersistenceContext(unitName = "p4PU")
     private EntityManager em;
 
-    public EditorialFacadeREST() {
-        super(Editorial.class);
+    public LibroFacadeREST() {
+        super(Libro.class);
     }
 
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Editorial entity) {
+    public void create(Libro entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Editorial entity) {
+    public void edit(@PathParam("id") Integer id, Libro entity) {
         super.edit(entity);
     }
 
@@ -58,22 +59,31 @@ public class EditorialFacadeREST extends AbstractFacade<Editorial> {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Editorial find(@PathParam("id") Integer id) {
+    public Libro find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Editorial> findAll() {
+    public List<Libro> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Editorial> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Libro> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
+    }
+    
+    @GET
+    @Path("getHTML")
+    @Produces(MediaType.TEXT_HTML)
+    public String getHtml(@QueryParam("id") Integer id) {
+        Libro aux = this.find(id);
+        
+       return "T&iacute;tulo: "+aux.getTitulo()+", Autor: "+aux.getAutor()+"<br>";
     }
 
     @GET

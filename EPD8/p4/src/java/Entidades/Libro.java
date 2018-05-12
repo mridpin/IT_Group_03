@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package p4;
+package Entidades;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -12,8 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -61,9 +59,6 @@ public class Libro implements Serializable {
     @NotNull
     @Column(name = "isbn")
     private int isbn;
-    @JoinColumn(name = "editorialid", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Editorial editorialid;
 
     public Libro() {
     }
@@ -120,14 +115,6 @@ public class Libro implements Serializable {
         this.isbn = isbn;
     }
 
-    public Editorial getEditorialid() {
-        return editorialid;
-    }
-
-    public void setEditorialid(Editorial editorialid) {
-        this.editorialid = editorialid;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -150,7 +137,7 @@ public class Libro implements Serializable {
 
     @Override
     public String toString() {
-        return "p4.Libro[ id=" + id + " ]";
+        return "Entidades.Libro[ id=" + id + " ]";
     }
     
 }
