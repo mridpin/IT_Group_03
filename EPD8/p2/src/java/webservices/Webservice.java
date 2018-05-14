@@ -34,17 +34,6 @@ public class Webservice {
     }
 
     /**
-     * Retrieves representation of an instance of webservices.Webservice
-     * @return an instance of java.lang.String
-     */
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getText() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
-    }
-
-    /**
      * PUT method for updating or creating an instance of Webservice
      * @param content representation for the resource
      */
@@ -59,12 +48,12 @@ public class Webservice {
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String getStrongPassword(@QueryParam("seed") Integer length) {
+    public String getStrongPassword(@QueryParam("length") Integer length) {
         Random r = new Random();
         String seed = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
         String res = "";
         for (int i = 0; i<length; i++) {
-            res += seed.charAt(r.nextInt(length));
+            res += seed.charAt(r.nextInt(seed.length()));
         }
         return res;
     }
