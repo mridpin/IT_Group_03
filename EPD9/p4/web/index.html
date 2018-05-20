@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+
+    <body>
+
+        <div id="demo"></div>
+        <script type="text/javascript">
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://localhost:8080/p7/webresources/entities.pelicula", false);
+            xhttp.setRequestHeader("Accept", "application/json");
+            xhttp.send();
+            document.write("<h1>" + xhttp.responseText + "</h1>");
+            var datos = eval(xhttp.responseText);
+
+            var tabla = document.createElement("table");
+            tabla.setAttribute('border', '1');
+            
+            for (var i in datos) {
+                var fila = document.createElement("tr");
+                if(i === "0"){
+                    var fila1 = document.createElement("tr");
+                }
+                for (var attr in datos[i]) {
+                    if(i === "0"){
+                        var th = document.createElement("th");
+                        th.appendChild(document.createTextNode(attr));
+                        fila1.appendChild(th);
+                    }
+                    var td = document.createElement("td");
+                    td.appendChild(document.createTextNode(datos[i][attr]));
+                    fila.appendChild(td);
+                }
+                if(i === "0"){
+                    tabla.appendChild(fila1);
+                }
+                tabla.appendChild(fila);
+            }
+            
+            document.body.appendChild(tabla);
+        </script>
+    </body>
+</html>
