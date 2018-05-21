@@ -13,6 +13,7 @@
 <!DOCTYPE html>
 <%
     PeliculasJerseyClient client = new PeliculasJerseyClient();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     if (request.getParameter("modificar") != null) {
         Pelicula p = new Pelicula();
@@ -30,14 +31,7 @@
     } else if (request.getParameter("crear") != null) {
         Pelicula p = new Pelicula();
         p.setNombre(request.getParameter("nombre"));
-//        Date estreno = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(request.getParameter("fechaEstreno"));
-//        p.setFechaEstreno(estreno);
-//        // Tue Jun 01 00:00:00 CEST 1993
-//        Date video = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(request.getParameter("fechaVideo"));
-//        p.setFechaVideo(video);
         p.setFechaEstreno(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaEstreno")));
-        // Tue Jun 01 00:00:00 CEST 1993
-        //Date video = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(request.getParameter("fechaVideo"));
         p.setFechaVideo(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaVideo")));
         p.setIdioma(request.getParameter("idioma"));
         p.setPais(request.getParameter("pais"));
@@ -84,8 +78,8 @@
                 %>
                 <tr>
                     <td><input type="text" name="nombre" value="<%=p.getNombre()%>"></td>
-                    <td><input type="text" name="fechaEstreno" value="<%=p.getFechaEstreno()%>"></td>
-                    <td><input type="text" name="fechaVideo" value="<%=new SimpleDateFormat("yyyy-MM-dd").parse(p.getFechaVideo().toString())%>"></td>
+                    <td><input type="text" name="fechaEstreno" value="<%=sdf.format(p.getFechaEstreno())%>"></td>
+                    <td><input type="text" name="fechaVideo" value="<%=sdf.format(p.getFechaVideo())%>"></td>
                     <td><input type="text" name="idioma" value="<%=p.getIdioma()%>"></td>
                     <td><input type="text" name="pais" value="<%=p.getPais()%>"></td>
                 </tr>
@@ -96,6 +90,6 @@
                     }
                 %>
             </form>
-            <p>Formato de las fechas: <em>Mon Jan 01 00:00:00 CEST 2000</em></p>
+            <p>Formato de las fechas: <em>2018-02-20</em></p>
     </body> 
 </html>

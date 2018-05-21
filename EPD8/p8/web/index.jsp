@@ -4,6 +4,7 @@
     Author     : ridao
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="javax.ws.rs.core.GenericType"%>
 <%@page import="model.PeliculasJerseyClient"%>
 <%@page import="java.util.List"%>
@@ -15,6 +16,7 @@
     GenericType<List<Pelicula>> genericType = new GenericType<List<Pelicula>>() {
     };
     List<Pelicula> peliculas = client.findAll_JSON(genericType);
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>    
 <html>
     <head>
@@ -43,8 +45,8 @@
                 %>
                 <tr>
                     <td><%=p.getNombre()%></td>
-                    <td><%=p.getFechaEstreno()%></td>
-                    <td><%=p.getFechaVideo()%></td>
+                    <td><%=sdf.format(p.getFechaEstreno())%></td>
+                    <td><%=sdf.format(p.getFechaVideo())%></td>
                     <td><%=p.getIdioma()%></td>
                     <td><%=p.getPais()%></td>
                     <td>
