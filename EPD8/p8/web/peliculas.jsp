@@ -18,11 +18,11 @@
         Pelicula p = new Pelicula();
         p.setId(Integer.parseInt(request.getParameter("id")));
         p.setNombre(request.getParameter("nombre"));
-        Date estreno = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(request.getParameter("fechaEstreno"));
-        p.setFechaEstreno(estreno);
+        //Date estreno = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(request.getParameter("fechaEstreno"));
+        p.setFechaEstreno(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaEstreno")));
         // Tue Jun 01 00:00:00 CEST 1993
-        Date video = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(request.getParameter("fechaVideo"));
-        p.setFechaVideo(video);
+        //Date video = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(request.getParameter("fechaVideo"));
+        p.setFechaVideo(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaVideo")));
         p.setIdioma(request.getParameter("idioma"));
         p.setPais(request.getParameter("pais"));
         client.edit_JSON(p, p.getId().toString());
@@ -30,11 +30,15 @@
     } else if (request.getParameter("crear") != null) {
         Pelicula p = new Pelicula();
         p.setNombre(request.getParameter("nombre"));
-        Date estreno = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(request.getParameter("fechaEstreno"));
-        p.setFechaEstreno(estreno);
+//        Date estreno = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(request.getParameter("fechaEstreno"));
+//        p.setFechaEstreno(estreno);
+//        // Tue Jun 01 00:00:00 CEST 1993
+//        Date video = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(request.getParameter("fechaVideo"));
+//        p.setFechaVideo(video);
+        p.setFechaEstreno(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaEstreno")));
         // Tue Jun 01 00:00:00 CEST 1993
-        Date video = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(request.getParameter("fechaVideo"));
-        p.setFechaVideo(video);
+        //Date video = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(request.getParameter("fechaVideo"));
+        p.setFechaVideo(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaVideo")));
         p.setIdioma(request.getParameter("idioma"));
         p.setPais(request.getParameter("pais"));
         client.create_JSON(p);
@@ -81,7 +85,7 @@
                 <tr>
                     <td><input type="text" name="nombre" value="<%=p.getNombre()%>"></td>
                     <td><input type="text" name="fechaEstreno" value="<%=p.getFechaEstreno()%>"></td>
-                    <td><input type="text" name="fechaVideo" value="<%=p.getFechaVideo()%>"></td>
+                    <td><input type="text" name="fechaVideo" value="<%=new SimpleDateFormat("yyyy-MM-dd").parse(p.getFechaVideo().toString())%>"></td>
                     <td><input type="text" name="idioma" value="<%=p.getIdioma()%>"></td>
                     <td><input type="text" name="pais" value="<%=p.getPais()%>"></td>
                 </tr>
